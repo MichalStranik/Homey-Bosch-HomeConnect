@@ -55,3 +55,5 @@ Whenever the user inputs unstructured requirements, links to external systems (S
   - Any deviations from standard Material 3 or standard app styling.
 - **Touched Files:**
   - `<module/path/File.kt>`
+## Canonical working branch
+All current work MUST be committed and pushed to master. Keep master as the GitHub default branch. Earlier main-branch instructions are superseded by the user's explicit requirement on 2026-11-05.

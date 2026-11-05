@@ -73,3 +73,20 @@
 - Final API readback confirms TEST pointers and no LIVE release. Earlier HomeConnect 1.2.0 completion statements are superseded.
 
 - 2026-11-05: User authorized committing and pushing pending changes in HomeConnect, SALUS and SmartThings. Final test versions: 1.2.1 / 0.6.1 / 4.0.2; no live release. Store installation remains blocked by the Bridge confirmation dialog unsupported by this client. SALUS and SmartThings share origin/master; synchronize both checkouts after sequential commits.
+
+### [2026-11-05] [Canonical master branch]
+- **Status:** Completed
+- **Objective:** Keep all current project work on master, including the default GitHub branch.
+- **Sources & Ingestion:**
+  - **Figma:** None
+  - **Slack / Communications:** User explicitly states current data must always be in master.
+  - **Base Components Reused:** Existing branch histories and GitHub branch rename API.
+- **Decisions & Rationale (Why & How):**
+  - Rename HomeConnect and independent SALUS main to master, preserving commits and GitHub defaults. SmartThings already uses master.
+  - Preserve old local combined SALUS master under a backup name first. No force push, runtime or deployment changes.
+- **Touched Files:**
+  - AGENTS.md
+  - .ai/PROJECT_REQUIREMENTS.md
+  - .ai/CONTEXT_DECISIONS.md
+
+- 2026-11-05: Current branches renamed to master with original commits preserved; local tracking uses origin/master. GitHub rename API used for SALUS/HomeConnect. SmartThings remains master. Permanent rule added to AGENTS and project requirements. Old combined SALUS master preserved as backup/combined-master-before-20261105. Only branch names and documentation changed; no runtime/build changes or new deployment.
