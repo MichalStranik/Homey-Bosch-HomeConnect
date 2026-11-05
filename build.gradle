@@ -13,10 +13,24 @@ tasks.register('npmInstall', Exec) {
     commandLine isWindows ? ['cmd', '/c', 'npm', 'install'] : ['npm', 'install']
 }
 
+// The Homey CLI reads app.json before it runs Homey Compose, but app.json is
+// generated (and git-ignored). Seed it from .homeycompose/app.json on a fresh
+// checkout; `homey app install` then regenerates the full manifest.
+tasks.register('seedManifest') {
+    group = 'homey'
+    description = 'Create app.json from .homeycompose/app.json when it does not exist yet.'
+    def manifest = file('app.json')
+    def composeManifest = file('.homeycompose/app.json')
+    onlyIf { !manifest.exists() }
+    doLast {
+        manifest.text = composeManifest.text
+    }
+}
+
 tasks.register('installHomey', Exec) {
     group = 'homey'
     description = 'Install the app on the selected local Homey (homey app install).'
-    dependsOn 'npmInstall'
+    dependsOn 'npmInstall', 'seedManifest'
     workingDir rootDir
     standardInput = System.in
     commandLine nodeExecutable.get(), 'node_modules/homey/bin/homey.js', 'app', 'install'
