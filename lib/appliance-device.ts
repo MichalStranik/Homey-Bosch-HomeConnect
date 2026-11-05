@@ -21,6 +21,7 @@ const RUNNING_ONLY_FEATURES = new Set([
   "BSH.Common.Option.RemainingProgramTime",
   "BSH.Common.Option.ElapsedProgramTime",
   "BSH.Common.Option.StartInRelative",
+  "LaundryCare.Common.Option.ProcessPhase",
 ]);
 
 /** IDDF event levels that are notifications rather than faults. */
@@ -497,6 +498,10 @@ const CAPABILITY_MAP: Record<string, CapabilityMapEntry> = {
     decode: decodeBool,
     encode: encodeBool,
   },
+  "LaundryCare.Common.Option.ProcessPhase": {
+    capability: "homeconnect_laundry_process_phase",
+    decode: decodeLastSegment,
+  },
   // ===== Dryer (LaundryCare.Dryer) =========================================
   "LaundryCare.Dryer.Option.DryingTarget": {
     capability: "homeconnect_drying_target",
@@ -565,6 +570,8 @@ type TriggerDriver = Homey.Driver & {
   errorOccurredTrigger?: Homey.FlowCardTriggerDevice;
   /** Dishwasher-only; undefined on drivers that don't declare the card. */
   programPhaseChangedTrigger?: Homey.FlowCardTriggerDevice;
+  /** Washer-only (LaundryCare.Common.Option.ProcessPhase). */
+  processPhaseChangedTrigger?: Homey.FlowCardTriggerDevice;
   getEventMap?: () => Record<string, EventTriggerSpec>;
 };
 
@@ -985,6 +992,11 @@ export class ApplianceDevice extends Homey.Device {
         ?.trigger(this, { phase: String(value) }, {})
         .catch(this.error);
     }
+    if (capability === "homeconnect_laundry_process_phase") {
+      driver.processPhaseChangedTrigger
+        ?.trigger(this, { phase: String(value) }, {})
+        .catch(this.error);
+    }
   }
 
   /**
@@ -1018,6 +1030,7 @@ export class ApplianceDevice extends Homey.Device {
     clear("homeconnect_elapsed_time", null);
     clear("homeconnect_start_in_relative", null);
     clear("homeconnect_program_phase", "None");
+    clear("homeconnect_laundry_process_phase", "NoPhase");
     // Keep the program name on "Finished" so the user can still see what ran.
     if (this.getCapabilityValue("homeconnect_operation_state") !== "Finished") {
       clear("homeconnect_program", null);

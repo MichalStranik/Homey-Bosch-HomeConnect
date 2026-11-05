@@ -114,6 +114,30 @@
       ]
     },
     {
+      "id": "washer_process_phase_changed",
+      "title": {
+        "en": "The process phase changed",
+        "nl": "De procesfase is veranderd",
+        "de": "Die Prozessphase wurde geändert"
+      },
+      "tokens": [
+        {
+          "name": "phase",
+          "type": "string",
+          "title": {
+            "en": "Phase",
+            "nl": "Fase",
+            "de": "Phase"
+          },
+          "example": {
+            "en": "Rinsing",
+            "nl": "Rinsing",
+            "de": "Rinsing"
+          }
+        }
+      ]
+    },
+    {
       "id": "washer_remaining_time_changed",
       "title": {
         "en": "Remaining time changed",

@@ -9,6 +9,8 @@ class WasherDriver extends ApplianceDriver {
   protected readonly applianceType = "Washer";
   protected readonly cardPrefix = "washer";
 
+  processPhaseChangedTrigger!: Homey.FlowCardTriggerDevice;
+
   protected eventMap(): Record<string, EventTriggerSpec> {
     const idosLow = (dispenser: string): EventTriggerSpec => ({
       triggerKey: "idosLow",
@@ -25,6 +27,10 @@ class WasherDriver extends ApplianceDriver {
 
   async onInit(): Promise<void> {
     await super.onInit();
+
+    this.processPhaseChangedTrigger = this.homey.flow.getDeviceTriggerCard(
+      "washer_process_phase_changed",
+    );
 
     const action = (id: string): Homey.FlowCardAction =>
       this.homey.flow.getActionCard(`washer_${id}`);
