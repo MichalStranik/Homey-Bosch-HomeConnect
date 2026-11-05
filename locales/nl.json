@@ -10,7 +10,8 @@
       "remote_start_not_allowed": "Op afstand starten staat niet aan op het apparaat. Schakel dit eerst in op het apparaat zelf.",
       "feature_not_supported": "Dit apparaat ondersteunt die instelling niet.",
       "feature_not_available": "Die instelling is momenteel niet beschikbaar op het apparaat.",
-      "invalid_value": "Het apparaat heeft die waarde geweigerd."
+      "invalid_value": "Het apparaat heeft die waarde geweigerd.",
+      "use_finish_in": "Dit apparaat kan alleen plannen wanneer een programma klaar is. Gebruik de kaart \"Start een programma, klaar over…\"."
     }
   },
   "settings": {

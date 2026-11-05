@@ -1053,11 +1053,17 @@ export class ApplianceDevice extends Homey.Device {
   /**
    * Start a program now. `opts` may include legacy oven extras (temperature
    * °C / duration min) and an optional `delayMinutes` which adds the
-   * BSH.Common.Option.StartInRelative option.
+   * BSH.Common.Option.StartInRelative option, or `finishInMinutes` which adds
+   * BSH.Common.Option.FinishInRelative (laundry appliances: "ready in").
    */
   async startProgram(
     programName: string,
-    opts: { temperature?: number; duration?: number; delayMinutes?: number } = {},
+    opts: {
+      temperature?: number;
+      duration?: number;
+      delayMinutes?: number;
+      finishInMinutes?: number;
+    } = {},
   ): Promise<void> {
     const programUid = this.findUid(programName);
     if (programUid == null) throw new Error(this.homey.__("device.error.unknown_program"));
@@ -1078,9 +1084,20 @@ export class ApplianceDevice extends Homey.Device {
     if (opts.delayMinutes != null && opts.delayMinutes > 0) {
       const uid = this.findUid("BSH.Common.Option.StartInRelative");
       if (uid == null) {
-        throw new Error(this.homey.__("device.error.feature_not_supported"));
+        // Laundry appliances schedule the end, not the start.
+        const hasFinishIn = this.findUid("BSH.Common.Option.FinishInRelative") != null;
+        throw new Error(
+          this.homey.__(hasFinishIn ? "device.error.use_finish_in" : "device.error.feature_not_supported"),
+        );
       }
       options.push({ uid, value: Math.round(opts.delayMinutes * 60) });
+    }
+    if (opts.finishInMinutes != null && opts.finishInMinutes > 0) {
+      const uid = this.findUid("BSH.Common.Option.FinishInRelative");
+      if (uid == null) {
+        throw new Error(this.homey.__("device.error.feature_not_supported"));
+      }
+      options.push({ uid, value: Math.round(opts.finishInMinutes * 60) });
     }
 
     this.log(`startProgram ${programName} uid=${programUid} options=${JSON.stringify(options)}`);

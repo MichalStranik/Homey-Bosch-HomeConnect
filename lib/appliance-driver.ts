@@ -65,6 +65,24 @@ export abstract class ApplianceDriver extends Homey.Driver {
     return {};
   }
 
+  /**
+   * Register `<prefix>_start_program_finish_in` ("ready in N minutes", via
+   * BSH.Common.Option.FinishInRelative). Only laundry drivers declare the
+   * card, so they opt in from their onInit.
+   */
+  protected registerFinishInStart(): void {
+    const card = this.homey.flow.getActionCard(`${this.cardPrefix}_start_program_finish_in`);
+    card.registerRunListener(
+      async (args: { device: Homey.Device; program: { id: string }; finish_minutes: number }) =>
+        (args.device as ApplianceDevice).startProgram(args.program.id, {
+          finishInMinutes: args.finish_minutes,
+        }),
+    );
+    card.registerArgumentAutocompleteListener("program", async (query, args) =>
+      (args.device as ApplianceDevice).listPrograms(query),
+    );
+  }
+
   /** ApplianceDevice consults this via `(driver as TriggerDriver).getEventMap?.()`. */
   getEventMap(): Record<string, EventTriggerSpec> {
     return this.eventMap();

@@ -10,7 +10,8 @@
       "remote_start_not_allowed": "Fernstart ist am Gerät nicht aktiviert. Aktiviere ihn zuerst am Gerät.",
       "feature_not_supported": "Dieses Gerät unterstützt diese Einstellung nicht.",
       "feature_not_available": "Diese Einstellung ist am Gerät derzeit nicht verfügbar.",
-      "invalid_value": "Das Gerät hat diesen Wert abgelehnt."
+      "invalid_value": "Das Gerät hat diesen Wert abgelehnt.",
+      "use_finish_in": "Dieses Gerät kann nur das Programmende planen. Verwende die Karte \"Programm starten, fertig in…\"."
     }
   },
   "settings": {

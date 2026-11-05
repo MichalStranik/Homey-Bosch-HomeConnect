@@ -586,6 +586,47 @@
       ]
     },
     {
+      "id": "dryer_start_program_finish_in",
+      "title": {
+        "en": "Start a program, ready in…",
+        "nl": "Start een programma, klaar over…",
+        "de": "Programm starten, fertig in…"
+      },
+      "titleFormatted": {
+        "en": "Start [[program]], ready in [[finish_minutes]] min",
+        "nl": "Start [[program]], klaar over [[finish_minutes]] min",
+        "de": "[[program]] starten, fertig in [[finish_minutes]] Min."
+      },
+      "hint": {
+        "en": "Schedules the program so it finishes after the given time (the appliance picks the start). The time must be longer than the program itself.",
+        "nl": "Plant het programma zo dat het na de opgegeven tijd klaar is (het apparaat bepaalt de start). De tijd moet langer zijn dan het programma zelf.",
+        "de": "Plant das Programm so, dass es nach der angegebenen Zeit fertig ist (das Gerät wählt den Start). Die Zeit muss länger als das Programm sein."
+      },
+      "args": [
+        {
+          "name": "program",
+          "type": "autocomplete",
+          "title": {
+            "en": "Program",
+            "nl": "Programma",
+            "de": "Programm"
+          }
+        },
+        {
+          "name": "finish_minutes",
+          "type": "number",
+          "title": {
+            "en": "Ready in (min)",
+            "nl": "Klaar over (min)",
+            "de": "Fertig in (Min.)"
+          },
+          "min": 1,
+          "max": 1440,
+          "step": 1
+        }
+      ]
+    },
+    {
       "id": "dryer_stop_program",
       "title": {
         "en": "Stop the program",

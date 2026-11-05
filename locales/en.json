@@ -10,7 +10,8 @@
       "remote_start_not_allowed": "Remote start is not enabled on the appliance. Enable it on the appliance first.",
       "feature_not_supported": "This appliance does not support that setting.",
       "feature_not_available": "That setting is not currently available on the appliance.",
-      "invalid_value": "The appliance rejected that value."
+      "invalid_value": "The appliance rejected that value.",
+      "use_finish_in": "This appliance can only schedule when a program finishes. Use the \"Start a program, ready in…\" card."
     }
   },
   "settings": {

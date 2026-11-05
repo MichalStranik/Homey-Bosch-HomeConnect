@@ -17,6 +17,7 @@ class DryerDriver extends ApplianceDriver {
 
   async onInit(): Promise<void> {
     await super.onInit();
+    this.registerFinishInStart();
 
     this.homey.flow.getActionCard("dryer_set_drying_target").registerRunListener(
       async ({ device, value }: { device: Homey.Device; value: string }) =>

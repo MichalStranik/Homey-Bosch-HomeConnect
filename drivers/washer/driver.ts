@@ -31,6 +31,7 @@ class WasherDriver extends ApplianceDriver {
     this.processPhaseChangedTrigger = this.homey.flow.getDeviceTriggerCard(
       "washer_process_phase_changed",
     );
+    this.registerFinishInStart();
 
     const action = (id: string): Homey.FlowCardAction =>
       this.homey.flow.getActionCard(`washer_${id}`);
