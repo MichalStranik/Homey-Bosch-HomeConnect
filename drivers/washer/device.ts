@@ -10,11 +10,12 @@ const SELECTED_PROGRAM_FEATURE = "BSH.Common.Root.SelectedProgram";
 const REMOTE_CONTROL_FEATURE = "BSH.Common.Status.RemoteControlActive";
 
 /**
- * States in which the spin speed can be changed remotely. The WAX32KH1BY also
- * accepts it while a program runs (verified live: Rinse 1200 -> 800), it just
- * doesn't report the new value back - see setMappedCapabilityValue.
+ * States in which the spin limit is applied: before the start, and while the
+ * program runs - the WAX32KH1BY accepts a spin speed write during Run
+ * (verified live: Rinse 1200 -> 800), it just doesn't report the new value
+ * back (see setMappedCapabilityValue). The program is never paused for it.
  */
-const ADJUSTABLE_STATES = new Set(["Inactive", "Ready", "DelayedStart", "Run", "Pause"]);
+const ADJUSTABLE_STATES = new Set(["Inactive", "Ready", "DelayedStart", "Run"]);
 
 interface SpinLimitSettings {
   spin_limit_enabled?: boolean;
