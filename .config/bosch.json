@@ -1,0 +1,1596 @@
+[
+  {
+    "name": "washer",
+    "haId": "BOSCH-WAX32KH1BY-68A40E4E6EA7",
+    "host": "BOSCH-WAX32KH1BY-68A40E4E6EA7",
+    "key": "QowvHqaauxQydbOxrEcFfnlR0XWv1jaIbR4m7ASuSiM",
+    "iv": "C-fHcItD1n9Y3itb4KIfgw",
+    "description": {
+      "type": "Washer",
+      "brand": "BOSCH",
+      "model": "WAX32KH1BY",
+      "version": "2",
+      "revision": "0"
+    },
+    "features": {
+      "1": {
+        "name": "BSH.Common.Command.DeactivateWiFi",
+        "access": "writeOnly",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "3": {
+        "name": "BSH.Common.Setting.AllowBackendConnection",
+        "access": "readWrite",
+        "available": "true",
+        "initValue": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "5": {
+        "name": "BSH.Common.Status.BackendConnected",
+        "access": "read",
+        "available": "true",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "6": {
+        "name": "BSH.Common.Command.AcknowledgeEvent",
+        "access": "writeOnly",
+        "available": "true",
+        "refCID": "15",
+        "refDID": "81"
+      },
+      "16": {
+        "name": "BSH.Common.Command.RejectEvent",
+        "access": "writeOnly",
+        "available": "true",
+        "refCID": "15",
+        "refDID": "81"
+      },
+      "21": {
+        "name": "BSH.Common.Event.SoftwareUpdateAvailable",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "27": {
+        "name": "BSH.Common.Status.WiFiSignalStrength",
+        "access": "read",
+        "available": "true",
+        "initValue": "-128",
+        "notifyOnChange": "false",
+        "refCID": "12",
+        "refDID": "84"
+      },
+      "41": {
+        "name": "BSH.Common.Setting.Time.DisplayMode",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Relative",
+          "1": "Absolute"
+        },
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "256": {
+        "name": "BSH.Common.Root.ActiveProgram"
+      },
+      "257": {
+        "name": "BSH.Common.Root.SelectedProgram"
+      },
+      "258": {
+        "name": "BSH.Common.Root.StatusList"
+      },
+      "259": {
+        "name": "BSH.Common.Root.SettingList"
+      },
+      "260": {
+        "name": "BSH.Common.Root.EventList"
+      },
+      "261": {
+        "name": "BSH.Common.Root.CommandList"
+      },
+      "262": {
+        "name": "BSH.Common.Root.OptionList"
+      },
+      "263": {
+        "name": "BSH.Common.Root.ProgramGroup"
+      },
+      "512": {
+        "name": "BSH.Common.Command.AbortProgram",
+        "access": "none",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "515": {
+        "name": "BSH.Common.Setting.AllowEnergyManagement",
+        "access": "none",
+        "available": "true",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "517": {
+        "name": "BSH.Common.Status.RemoteControlStartAllowed",
+        "access": "read",
+        "available": "true",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "518": {
+        "name": "BSH.Common.Setting.AllowFlexStart",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "521": {
+        "name": "BSH.Common.Setting.ApplianceTime",
+        "access": "none",
+        "available": "false",
+        "refCID": "17",
+        "refDID": "A9"
+      },
+      "523": {
+        "name": "BSH.Common.Status.RemoteControlActive",
+        "access": "read",
+        "available": "true",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "524": {
+        "name": "BSH.Common.Setting.ChildLock",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "525": {
+        "name": "BSH.Common.Event.AquaStopOccured",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "critical",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "527": {
+        "name": "BSH.Common.Status.DoorState",
+        "access": "read",
+        "available": "true",
+        "values": {
+          "0": "Open",
+          "1": "Closed",
+          "2": "Locked",
+          "3": "Ajar"
+        },
+        "initValue": "1",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "529": {
+        "name": "BSH.Common.Status.CustomerEnergyManagerPaired",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "530": {
+        "name": "BSH.Common.Command.DepairCustomerEnergyManager",
+        "access": "none",
+        "available": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "531": {
+        "name": "BSH.Common.Option.EstimatedTotalProgramTime",
+        "access": "read",
+        "available": "true",
+        "initValue": "0",
+        "min": "60",
+        "refCID": "10",
+        "refDID": "82",
+        "stepSize": "60"
+      },
+      "533": {
+        "name": "BSH.Common.Setting.Language",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "1": "Ar",
+          "2": "Az",
+          "3": "Bg",
+          "4": "Bs",
+          "5": "Cs",
+          "6": "Da",
+          "7": "De",
+          "8": "El",
+          "9": "En",
+          "10": "EnUs",
+          "11": "Es",
+          "12": "EsMx",
+          "13": "Et",
+          "14": "Fi",
+          "15": "Fr",
+          "16": "FrCa",
+          "17": "He",
+          "18": "Hi",
+          "19": "Hr",
+          "20": "Hu",
+          "21": "Id",
+          "22": "Is",
+          "23": "It",
+          "24": "Ja",
+          "25": "Kk",
+          "26": "Ko",
+          "27": "Lt",
+          "28": "Lv",
+          "29": "Mk",
+          "30": "Mo",
+          "31": "Ms",
+          "32": "Nl",
+          "33": "No",
+          "34": "Pl",
+          "35": "Pt",
+          "36": "PtBr",
+          "37": "Ro",
+          "38": "Ru",
+          "39": "Sk",
+          "40": "Sl",
+          "41": "Sq",
+          "42": "Sr",
+          "43": "Sv",
+          "44": "Th",
+          "45": "Tr",
+          "46": "Uk",
+          "47": "Vi",
+          "48": "Zh",
+          "49": "ZhHk",
+          "50": "ZhTw",
+          "51": "Fa"
+        },
+        "initValue": "7",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "535": {
+        "name": "BSH.Common.Status.LocalControlActive",
+        "access": "read",
+        "available": "true",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "536": {
+        "name": "BSH.Common.Command.MainsPowerOff",
+        "access": "writeOnly",
+        "available": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "537": {
+        "name": "BSH.Common.Command.PauseProgram",
+        "access": "none",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "539": {
+        "name": "BSH.Common.Setting.PowerState",
+        "access": "read",
+        "available": "true",
+        "values": {
+          "0": "MainsOff",
+          "2": "On",
+          "3": "Standby"
+        },
+        "initValue": "2",
+        "max": "3",
+        "min": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "540": {
+        "name": "BSH.Common.Event.ProgramFinished",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "542": {
+        "name": "BSH.Common.Option.ProgramProgress",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "refCID": "11",
+        "refDID": "A0",
+        "stepSize": "1"
+      },
+      "543": {
+        "name": "BSH.Common.Event.LowWaterPressure",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "alert",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "544": {
+        "name": "BSH.Common.Option.RemainingProgramTime",
+        "access": "read",
+        "available": "true",
+        "initValue": "0",
+        "max": "21600",
+        "min": "0",
+        "refCID": "10",
+        "refDID": "82",
+        "stepSize": "60"
+      },
+      "545": {
+        "name": "BSH.Common.Event.ProgramAborted",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "546": {
+        "name": "BSH.Common.Command.ResumeProgram",
+        "access": "none",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "547": {
+        "name": "BSH.Common.Setting.SynchronizeWithTimeServer",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "548": {
+        "name": "BSH.Common.Option.Duration",
+        "access": "none",
+        "available": "false",
+        "initValue": "1200",
+        "max": "12600",
+        "min": "300",
+        "refCID": "10",
+        "refDID": "82",
+        "stepSize": "300"
+      },
+      "549": {
+        "name": "BSH.Common.Option.RemainingProgramTimeIsEstimated",
+        "access": "read",
+        "available": "true",
+        "initValue": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "551": {
+        "name": "BSH.Common.Option.FinishInRelative",
+        "access": "none",
+        "available": "true",
+        "initValue": "0",
+        "max": "86400",
+        "min": "0",
+        "refCID": "10",
+        "refDID": "82",
+        "stepSize": "60"
+      },
+      "552": {
+        "name": "BSH.Common.Status.OperationState",
+        "access": "read",
+        "available": "true",
+        "values": {
+          "0": "Inactive",
+          "1": "Ready",
+          "2": "DelayedStart",
+          "3": "Run",
+          "4": "Pause",
+          "5": "ActionRequired",
+          "6": "Finished",
+          "7": "Error",
+          "8": "Aborting"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "553": {
+        "name": "BSH.Common.Command.ApplyFactoryReset",
+        "access": "none",
+        "available": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "554": {
+        "name": "BSH.Common.Command.ApplyNetworkReset",
+        "access": "none",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "555": {
+        "name": "BSH.Common.Command.DeactivateRemoteControlStart",
+        "access": "writeOnly",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "557": {
+        "name": "BSH.Common.Status.CustomerServiceConnectionAllowed",
+        "access": "read",
+        "available": "true",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "559": {
+        "name": "BSH.Common.Event.CustomerServiceRequest",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "560": {
+        "name": "BSH.Common.Command.DisallowCustomerServiceConnection",
+        "access": "none",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "561": {
+        "name": "BSH.Common.Option.EnergyForecast",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "refCID": "11",
+        "refDID": "A0",
+        "stepSize": "20"
+      },
+      "562": {
+        "name": "BSH.Common.Option.WaterForecast",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "refCID": "11",
+        "refDID": "A0",
+        "stepSize": "20"
+      },
+      "568": {
+        "name": "BSH.Common.Status.FlexStart",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Disabled",
+          "1": "Enabled",
+          "2": "Pending",
+          "3": "Scheduled",
+          "4": "Started",
+          "5": "Finished"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "576": {
+        "name": "BSH.Common.Command.AllowCustomerServiceConnectionLocalWiFi",
+        "access": "none",
+        "available": "true",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "580": {
+        "name": "BSH.Common.Setting.TimeFormat",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "24Hours",
+          "1": "12Hours"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "586": {
+        "name": "BSH.Common.Option.FlexFinishInRelative",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "max": "86400",
+        "min": "0",
+        "refCID": "10",
+        "refDID": "82",
+        "stepSize": "60"
+      },
+      "591": {
+        "name": "BSH.Common.Status.RemoteControlStartAllowedSince",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "refCID": "10",
+        "refDID": "82"
+      },
+      "598": {
+        "name": "BSH.Common.Event.HomeConnectApplianceDataMissing",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "1024": {
+        "name": "LaundryCare.Common.StatusList.ProcessingData",
+        "access": "none",
+        "available": "true"
+      },
+      "1025": {
+        "name": "LaundryCare.Common.StatusList.WasherData",
+        "access": "none",
+        "available": "true"
+      },
+      "1041": {
+        "name": "LaundryCare.Washer.Status.ProcessingData.LaundryLoad",
+        "access": "none",
+        "available": "false",
+        "refCID": "13",
+        "refDID": "81",
+        "stepSize": "1"
+      },
+      "1042": {
+        "name": "LaundryCare.Washer.Status.ProcessingData.PeakFinalSpinSpeed",
+        "access": "none",
+        "available": "false",
+        "refCID": "1F",
+        "refDID": "81",
+        "stepSize": "1"
+      },
+      "1043": {
+        "name": "LaundryCare.Washer.Status.ProcessingData.PeakFinalSpinSpeedDuration",
+        "access": "none",
+        "available": "false",
+        "refCID": "10",
+        "refDID": "82"
+      },
+      "1044": {
+        "name": "LaundryCare.Washer.Status.ProcessingData.TextileType",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Mixed",
+          "1": "Cotton",
+          "2": "Synthetic"
+        },
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "5402": {
+        "name": "LaundryCare.Common.CommandList.RemoteStart",
+        "access": "none",
+        "available": "true"
+      },
+      "5658": {
+        "name": "LaundryCare.Common.OptionList.SelectedStatus",
+        "access": "none",
+        "available": "true"
+      },
+      "5659": {
+        "name": "LaundryCare.Common.OptionList.ActiveStatus",
+        "access": "none",
+        "available": "true"
+      },
+      "5660": {
+        "name": "LaundryCare.Common.OptionList.RemoteStart",
+        "access": "none",
+        "available": "true"
+      },
+      "5661": {
+        "name": "LaundryCare.Common.OptionList.Options",
+        "access": "none",
+        "available": "true"
+      },
+      "5904": {
+        "name": "LaundryCare.Common.ProgramGroup.Favorites",
+        "available": "false"
+      },
+      "5906": {
+        "name": "LaundryCare.Common.ProgramGroup.Regular",
+        "available": "true"
+      },
+      "5907": {
+        "name": "LaundryCare.Common.ProgramGroup.Washer",
+        "available": "false"
+      },
+      "8193": {
+        "name": "LaundryCare.Washer.Status.IDos1FillLevel",
+        "access": "read",
+        "available": "false",
+        "values": {
+          "0": "Poor",
+          "1": "Filled"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "8194": {
+        "name": "LaundryCare.Washer.Status.IDos2FillLevel",
+        "access": "read",
+        "available": "false",
+        "values": {
+          "0": "Poor",
+          "1": "Filled"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "10754": {
+        "name": "LaundryCare.Common.Status.LoadInformation",
+        "access": "read",
+        "available": "false",
+        "initValue": "0",
+        "max": "25500",
+        "min": "0",
+        "refCID": "13",
+        "refDID": "81",
+        "stepSize": "100"
+      },
+      "10755": {
+        "name": "LaundryCare.Common.Status.SelectedProgramGroup",
+        "access": "none",
+        "available": "false",
+        "initValue": "1713",
+        "refCID": "15",
+        "refDID": "81"
+      },
+      "12289": {
+        "name": "LaundryCare.Washer.Setting.IDos2Content",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "1": "Softener",
+          "2": "Detergent"
+        },
+        "initValue": "1",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "12290": {
+        "name": "LaundryCare.Washer.Setting.IDos1BaseLevel",
+        "access": "none",
+        "available": "false",
+        "initValue": "36",
+        "max": "200",
+        "min": "10",
+        "refCID": "14",
+        "refDID": "80",
+        "stepSize": "1"
+      },
+      "12291": {
+        "name": "LaundryCare.Washer.Setting.IDos2BaseLevel",
+        "access": "none",
+        "available": "false",
+        "initValue": "75",
+        "max": "200",
+        "min": "10",
+        "refCID": "14",
+        "refDID": "80",
+        "stepSize": "1"
+      },
+      "12292": {
+        "name": "LaundryCare.Washer.Setting.EnableDrumCleanReminder",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "12293": {
+        "name": "LaundryCare.Washer.Setting.IDos1.ContentName",
+        "access": "none",
+        "available": "false",
+        "initValue": "Idos1ContentName",
+        "max": "16",
+        "refCID": "05",
+        "refDID": "8B"
+      },
+      "12294": {
+        "name": "LaundryCare.Washer.Setting.IDos2.ContentName",
+        "access": "none",
+        "available": "false",
+        "initValue": "Idos2ContentName",
+        "max": "16",
+        "refCID": "05",
+        "refDID": "8B"
+      },
+      "14849": {
+        "name": "LaundryCare.Common.Setting.EndSignalVolume",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Off",
+          "1": "Low",
+          "2": "Medium",
+          "3": "Loud",
+          "4": "VeryLoud"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "14850": {
+        "name": "LaundryCare.Common.Setting.KeySignalVolume",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Off",
+          "1": "Low",
+          "2": "Medium",
+          "3": "Loud",
+          "4": "VeryLoud"
+        },
+        "initValue": "0",
+        "max": "4",
+        "min": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "14851": {
+        "name": "LaundryCare.Common.Setting.AutoPowerOff",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Off",
+          "15": "15min",
+          "30": "30min",
+          "60": "60min"
+        },
+        "initValue": "15",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "14852": {
+        "name": "LaundryCare.Common.Setting.DoorLightRing.ActiveMode",
+        "access": "readWrite",
+        "available": "false",
+        "values": {
+          "0": "Off",
+          "1": "On",
+          "2": "Auto"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "14853": {
+        "name": "LaundryCare.Common.Setting.EndSignal",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "14854": {
+        "name": "LaundryCare.Common.Setting.BrightnessLevel",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Low",
+          "1": "Medium",
+          "2": "High",
+          "3": "VeryHigh"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "14857": {
+        "name": "LaundryCare.Common.Setting.DoorLightRing.Active",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "14858": {
+        "name": "LaundryCare.Common.Setting.DoorLightRing.BrightnessLevel",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Low",
+          "1": "Medium",
+          "2": "High",
+          "3": "VeryHigh"
+        },
+        "initValue": "0",
+        "max": "3",
+        "min": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "14860": {
+        "name": "LaundryCare.Common.Setting.Sound.Mute",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "14861": {
+        "name": "LaundryCare.Common.Setting.TimeLight.Active",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "14862": {
+        "name": "LaundryCare.Common.Setting.Brightness",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "max": "100",
+        "min": "0",
+        "refCID": "11",
+        "refDID": "A0"
+      },
+      "14863": {
+        "name": "LaundryCare.Common.Setting.DoorLightRing.Brightness",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "max": "100",
+        "min": "0",
+        "refCID": "11",
+        "refDID": "A0"
+      },
+      "16385": {
+        "name": "LaundryCare.Washer.Event.IDos1FillLevelPoor",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "warning",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16386": {
+        "name": "LaundryCare.Washer.Event.IDos2FillLevelPoor",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "warning",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16387": {
+        "name": "LaundryCare.Washer.Event.ReleaseRinseHoldPending",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "decision",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16389": {
+        "name": "LaundryCare.Washer.Event.DrumCleanReminder",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16390": {
+        "name": "LaundryCare.Washer.Event.IDosUnitDefect",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "alert",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16391": {
+        "name": "LaundryCare.Washer.Event.PumpError",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "critical",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16393": {
+        "name": "LaundryCare.Washer.Event.Spin.SpinAbort",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "16394": {
+        "name": "LaundryCare.Washer.Event.IDos.IDosOpenTray",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "warning",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18946": {
+        "name": "LaundryCare.Common.Event.FatalErrorOccured",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "critical",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18949": {
+        "name": "LaundryCare.Common.Event.DoorNotUnlockable",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18950": {
+        "name": "LaundryCare.Common.Event.DoorNotLockable",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "alert",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18951": {
+        "name": "LaundryCare.Common.Event.DoorOpen",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "alert",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18952": {
+        "name": "LaundryCare.Common.Event.FoamDetection",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18953": {
+        "name": "LaundryCare.Common.Event.DoorLock.WaterLevelTooHigh",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "warning",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18954": {
+        "name": "LaundryCare.Common.Event.DelayedShutdown",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "hint",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18955": {
+        "name": "LaundryCare.Common.Event.DelayedShutdownCanceled",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "acknowledge",
+        "level": "info",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "18956": {
+        "name": "LaundryCare.Common.Event.SupplyPower.SupplyVoltageTooLow",
+        "values": {
+          "0": "Off",
+          "1": "Present",
+          "2": "Confirmed"
+        },
+        "handling": "none",
+        "level": "alert",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "23041": {
+        "name": "LaundryCare.Common.Command.SelectProgramGroup",
+        "access": "none",
+        "available": "false",
+        "refCID": "15",
+        "refDID": "81"
+      },
+      "24577": {
+        "name": "LaundryCare.Washer.Option.Temperature",
+        "access": "none",
+        "available": "true",
+        "values": {
+          "0": "Cold",
+          "1": "GC20",
+          "2": "GC30",
+          "3": "GC40",
+          "4": "GC50",
+          "5": "GC60",
+          "6": "GC70",
+          "7": "GC80",
+          "8": "GC90",
+          "10": "UlCold",
+          "13": "UlWarm",
+          "15": "UlHot",
+          "18": "UlExtraHot",
+          "254": "Auto",
+          "255": "Max"
+        },
+        "initValue": "0",
+        "max": "255",
+        "min": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24578": {
+        "name": "LaundryCare.Washer.Option.SpinSpeed",
+        "access": "none",
+        "available": "true",
+        "default": "0",
+        "values": {
+          "0": "Off",
+          "1": "UlOff",
+          "39": "UlLow",
+          "40": "RPM400",
+          "60": "RPM600",
+          "70": "RPM700",
+          "79": "UlMedium",
+          "80": "RPM800",
+          "90": "RPM900",
+          "100": "RPM1000",
+          "119": "UlHigh",
+          "120": "RPM1200",
+          "140": "RPM1400",
+          "150": "RPM1500",
+          "160": "RPM1600",
+          "254": "Auto",
+          "255": "Max"
+        },
+        "initValue": "0",
+        "max": "255",
+        "min": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24579": {
+        "name": "LaundryCare.Washer.Option.WaterPlus",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24581": {
+        "name": "LaundryCare.Washer.Option.Stains",
+        "access": "none",
+        "available": "false",
+        "default": "0",
+        "values": {
+          "0": "Off",
+          "1": "BabyFood",
+          "2": "Blood",
+          "3": "Egg",
+          "4": "Mud",
+          "5": "Grass",
+          "6": "Coffee",
+          "7": "Cosmetics",
+          "8": "RedWine",
+          "9": "Chocolate",
+          "10": "Perspiration",
+          "11": "Socks",
+          "12": "ButterOil",
+          "13": "Tea",
+          "14": "TomatoSauce",
+          "15": "Strawberry",
+          "16": "Orange"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24582": {
+        "name": "LaundryCare.Washer.Option.Prewash",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24583": {
+        "name": "LaundryCare.Washer.Option.RinsePlus",
+        "access": "none",
+        "available": "false",
+        "default": "0",
+        "values": {
+          "0": "Off",
+          "1": "Plus1",
+          "2": "Plus2",
+          "3": "Plus3"
+        },
+        "initValue": "0",
+        "max": "3",
+        "min": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24584": {
+        "name": "LaundryCare.Washer.Option.RinseHold",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24585": {
+        "name": "LaundryCare.Washer.Option.LessIroning",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24586": {
+        "name": "LaundryCare.Washer.Option.SilentWash",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24587": {
+        "name": "LaundryCare.Washer.Option.IDos1DosingLevel",
+        "access": "none",
+        "available": "false",
+        "default": "1",
+        "values": {
+          "0": "Off",
+          "1": "Light",
+          "2": "Normal",
+          "3": "Strong"
+        },
+        "initValue": "1",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24588": {
+        "name": "LaundryCare.Washer.Option.IDos2DosingLevel",
+        "access": "none",
+        "available": "false",
+        "default": "2",
+        "values": {
+          "0": "Off",
+          "1": "Light",
+          "2": "Normal",
+          "3": "Strong"
+        },
+        "initValue": "2",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24589": {
+        "name": "LaundryCare.Washer.Option.RinsePlus1",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24590": {
+        "name": "LaundryCare.Washer.Option.RinsePlus3",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24591": {
+        "name": "LaundryCare.Washer.Option.WaterAndRinsePlus",
+        "access": "none",
+        "available": "false",
+        "default": "0",
+        "values": {
+          "0": "Off",
+          "1": "Plus1",
+          "2": "Plus2",
+          "3": "Plus3"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24592": {
+        "name": "LaundryCare.Washer.Option.Soak",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24593": {
+        "name": "LaundryCare.Washer.Option.Disinfectant",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24594": {
+        "name": "LaundryCare.Washer.Option.HygienicSteam",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24595": {
+        "name": "LaundryCare.Washer.Option.MultipleSoak",
+        "access": "none",
+        "available": "false",
+        "default": "0",
+        "values": {
+          "0": "Off",
+          "1": "Plus1",
+          "2": "Plus2",
+          "3": "Plus3"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24596": {
+        "name": "LaundryCare.Washer.Option.WaterAndRinsePlus1",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24597": {
+        "name": "LaundryCare.Washer.Option.HygienicSteamIntensity",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Middle",
+          "1": "High"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "24833": {
+        "name": "LaundryCare.Washer.Option.IDos1.Active",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24834": {
+        "name": "LaundryCare.Washer.Option.IDos2.Active",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24835": {
+        "name": "LaundryCare.Washer.Option.SpeedPerfect",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "24836": {
+        "name": "LaundryCare.Washer.Option.IntensivePlus",
+        "access": "none",
+        "available": "false",
+        "default": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "27137": {
+        "name": "LaundryCare.Common.Option.VarioPerfect",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "Off",
+          "1": "EcoPerfect",
+          "2": "SpeedPerfect"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "27138": {
+        "name": "LaundryCare.Common.Option.LoadRecommendation",
+        "access": "none",
+        "available": "false",
+        "initValue": "0",
+        "max": "25500",
+        "min": "0",
+        "refCID": "13",
+        "refDID": "81",
+        "stepSize": "100"
+      },
+      "27140": {
+        "name": "LaundryCare.Common.Option.LowTemperatureHygiene",
+        "access": "none",
+        "available": "false",
+        "initValue": "false",
+        "refCID": "01",
+        "refDID": "00"
+      },
+      "27141": {
+        "name": "LaundryCare.Common.Option.ReferToProgram",
+        "access": "none",
+        "available": "false",
+        "default": "0",
+        "initValue": "0",
+        "refCID": "15",
+        "refDID": "81"
+      },
+      "27142": {
+        "name": "LaundryCare.Common.Option.ProcessPhase",
+        "access": "none",
+        "available": "false",
+        "values": {
+          "0": "NoPhase",
+          "1": "Prewash",
+          "2": "IntermediateSpin",
+          "3": "FillingDetergent",
+          "4": "DetectingLoad",
+          "5": "Heating",
+          "6": "Washing",
+          "7": "Cooldown",
+          "8": "RinsingFoam",
+          "9": "Rinsing",
+          "10": "RinsingAquaSensor",
+          "11": "RinseOnly",
+          "12": "WaterProofing",
+          "13": "RinsingSoftener",
+          "14": "HoldAfterRinse",
+          "15": "Pumping",
+          "16": "SpinningFinal",
+          "17": "LessIroning",
+          "18": "Fluffing",
+          "19": "Soaking",
+          "20": "HygienicSteamFogging",
+          "21": "GuardingOxy",
+          "22": "GeneratingOzone",
+          "23": "DegradingOzone",
+          "24": "Drying",
+          "25": "CoolingDown",
+          "26": "AdditionalCoolingDown",
+          "27": "GuardingWrinkle",
+          "28": "DetectingTextile",
+          "29": "DetectingSoil",
+          "30": "Disinfecting",
+          "31": "LowTemperatureHygiene",
+          "32": "SteamingActive",
+          "33": "IronDryReached",
+          "34": "CupboardDryReached",
+          "35": "CupboardDryPlusReached",
+          "36": "CleaningHeatExchanger",
+          "37": "SlightlyDampReached",
+          "38": "ExtraDryReached",
+          "39": "GentlyDryReached",
+          "40": "QuickCare",
+          "41": "DepthCarePhase1",
+          "42": "DepthCarePhase2",
+          "43": "ColdRefreshing",
+          "128": "AnyPhase"
+        },
+        "initValue": "0",
+        "refCID": "03",
+        "refDID": "80"
+      },
+      "28673": {
+        "name": "LaundryCare.Washer.Program.Cotton",
+        "available": "false"
+      },
+      "28674": {
+        "name": "LaundryCare.Washer.Program.EasyCare",
+        "available": "false"
+      },
+      "28675": {
+        "name": "LaundryCare.Washer.Program.Mix",
+        "available": "false"
+      },
+      "28676": {
+        "name": "LaundryCare.Washer.Program.DelicatesSilk",
+        "available": "false"
+      },
+      "28677": {
+        "name": "LaundryCare.Washer.Program.Wool",
+        "available": "false"
+      },
+      "28679": {
+        "name": "LaundryCare.Washer.Program.ShirtsBlouses",
+        "available": "false"
+      },
+      "28681": {
+        "name": "LaundryCare.Washer.Program.Auto30",
+        "available": "false"
+      },
+      "28690": {
+        "name": "LaundryCare.Washer.Program.DrumClean",
+        "available": "false"
+      },
+      "28692": {
+        "name": "LaundryCare.Washer.Program.Rinse",
+        "available": "false"
+      },
+      "28695": {
+        "name": "LaundryCare.Washer.Program.SportFitness",
+        "available": "false"
+      },
+      "28696": {
+        "name": "LaundryCare.Washer.Program.Super153045.Super1530",
+        "available": "false"
+      },
+      "28713": {
+        "name": "LaundryCare.Washer.Program.Spin.SpinDrain",
+        "available": "false"
+      },
+      "28718": {
+        "name": "LaundryCare.Washer.Program.Cotton.Eco4060",
+        "available": "false"
+      },
+      "28719": {
+        "name": "LaundryCare.Washer.Program.Cotton.Colour",
+        "available": "false"
+      },
+      "31233": {
+        "name": "LaundryCare.Common.Program.Memory1",
+        "available": "false"
+      },
+      "31234": {
+        "name": "LaundryCare.Common.Program.Memory2",
+        "available": "false"
+      },
+      "31235": {
+        "name": "LaundryCare.Common.Program.Memory3",
+        "available": "false"
+      },
+      "31236": {
+        "name": "LaundryCare.Common.Program.Memory4",
+        "available": "false"
+      },
+      "31237": {
+        "name": "LaundryCare.Common.Program.Memory5",
+        "available": "false"
+      },
+      "31238": {
+        "name": "LaundryCare.Common.Program.Memory6",
+        "available": "false"
+      },
+      "31239": {
+        "name": "LaundryCare.Common.Program.Memory7",
+        "available": "false"
+      },
+      "31240": {
+        "name": "LaundryCare.Common.Program.Memory8",
+        "available": "false"
+      }
+    }
+  }
+]
