@@ -76,7 +76,9 @@ settings-page login fails with `HOMECONNECT_CLIENT_ID is not set in env.json`.
 
 The shared run configuration **Homey - Install** (`.run/`) runs the Gradle task
 `installHomey`, which executes `homey app install` with the project-local Homey
-CLI (running `npm install` first if `node_modules` is missing). From a terminal:
+CLI. On a fresh checkout it first runs `npm install` (if `node_modules` is
+missing) and seeds `app.json` from `.homeycompose/app.json` (the CLI refuses to
+start without one; the install then regenerates the full manifest). From a terminal:
 
 ```bash
 ./gradlew installHomey        # Windows: gradlew.bat installHomey
@@ -131,6 +133,7 @@ docs/                  Architecture, Flow playbook, research notes
 
 - [docs/architecture.md](docs/architecture.md) — architecture, protocol, data model, extension guide
 - [docs/homey-flow-playbook.md](docs/homey-flow-playbook.md) — Flow recipes per appliance
+- [docs/appliances/](docs/appliances/) — tested appliance profiles and feature coverage (e.g. [WAX32KH1BY](docs/appliances/WAX32KH1BY.md))
 - [docs/official-client-test-plan.md](docs/official-client-test-plan.md) — research note (NL) on the official-app OAuth client
 - `README.txt` — Homey App Store description
 - `.homeychangelog.json` — release notes shown in Homey
