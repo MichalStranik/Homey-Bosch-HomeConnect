@@ -3,6 +3,7 @@
 import { ApplianceDevice } from "../../lib/appliance-device";
 
 const SPIN_SPEED_FEATURE = "LaundryCare.Washer.Option.SpinSpeed";
+const SELECTED_PROGRAM_FEATURE = "BSH.Common.Root.SelectedProgram";
 
 /**
  * Before the program starts the spin speed can still be changed; once it runs
@@ -25,11 +26,22 @@ function spinRpm(value: unknown): number | null {
 }
 
 class WasherDevice extends ApplianceDevice {
-  /** Program + value + limit of the last write, so a silently refused write isn't repeated. */
+  /**
+   * Program + value + limit of a write the appliance hasn't confirmed yet, so
+   * a silently refused write isn't repeated. Cleared as soon as the spin
+   * speed is within the limit, so every new excess is handled again.
+   */
   private lastSpinLimitWrite: string | null = null;
 
   protected onFeatureValue(featureName: string, value: unknown): void {
-    if (featureName === SPIN_SPEED_FEATURE) this.enforceSpinLimit(value);
+    if (featureName === SPIN_SPEED_FEATURE) {
+      this.enforceSpinLimit(value);
+    } else if (featureName === SELECTED_PROGRAM_FEATURE) {
+      // A new program brings its own default spin speed; the appliance may
+      // report it before or after the program, so re-check either way.
+      this.lastSpinLimitWrite = null;
+      this.enforceSpinLimit(this.getCapabilityValue("homeconnect_spin_speed"));
+    }
   }
 
   async onSettings({
@@ -56,7 +68,11 @@ class WasherDevice extends ApplianceDevice {
     if (!settings.spin_limit_enabled || !settings.spin_limit_rpm) return;
     const limit = spinRpm(settings.spin_limit_rpm);
     const current = spinRpm(value);
-    if (limit == null || current == null || current <= limit) return;
+    if (limit == null || current == null) return;
+    if (current <= limit) {
+      this.lastSpinLimitWrite = null;
+      return;
+    }
 
     const state = this.getCapabilityValue("homeconnect_operation_state");
     if (state != null && !ADJUSTABLE_STATES.has(String(state))) return;
