@@ -19,6 +19,14 @@
       }
     },
     {
+      "id": "Ajar",
+      "title": {
+        "en": "Ajar",
+        "nl": "Op een kier",
+        "de": "Angelehnt"
+      }
+    },
+    {
       "id": "Closed",
       "title": {
         "en": "Closed",

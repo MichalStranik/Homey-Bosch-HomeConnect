@@ -149,10 +149,10 @@ export abstract class ApplianceDriver extends Homey.Driver {
       async ({ device }: { device: Homey.Device }) =>
         device.getCapabilityValue("homeconnect_operation_state") === "Error",
     );
-    cond("door_is_open").registerRunListener(
-      async ({ device }: { device: Homey.Device }) =>
-        device.getCapabilityValue("homeconnect_door_state") === "Open",
-    );
+    cond("door_is_open").registerRunListener(async ({ device }: { device: Homey.Device }) => {
+      const door = device.getCapabilityValue("homeconnect_door_state");
+      return door === "Open" || door === "Ajar";
+    });
     cond("remote_start_allowed").registerRunListener(
       async ({ device }: { device: Homey.Device }) =>
         device.getCapabilityValue("homeconnect_remote_start") === true,

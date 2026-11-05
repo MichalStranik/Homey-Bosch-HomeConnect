@@ -813,6 +813,22 @@
                 "nl": "90 °C",
                 "de": "90 °C"
               }
+            },
+            {
+              "id": "Auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto",
+                "de": "Auto"
+              }
+            },
+            {
+              "id": "Max",
+              "label": {
+                "en": "Maximum",
+                "nl": "Maximaal",
+                "de": "Maximal"
+              }
             }
           ]
         }
@@ -865,11 +881,27 @@
               }
             },
             {
+              "id": "RPM700",
+              "label": {
+                "en": "700 rpm",
+                "nl": "700 tpm",
+                "de": "700 U/min"
+              }
+            },
+            {
               "id": "RPM800",
               "label": {
                 "en": "800 rpm",
                 "nl": "800 tpm",
                 "de": "800 U/min"
+              }
+            },
+            {
+              "id": "RPM900",
+              "label": {
+                "en": "900 rpm",
+                "nl": "900 tpm",
+                "de": "900 U/min"
               }
             },
             {
@@ -897,11 +929,35 @@
               }
             },
             {
+              "id": "RPM1500",
+              "label": {
+                "en": "1500 rpm",
+                "nl": "1500 tpm",
+                "de": "1500 U/min"
+              }
+            },
+            {
               "id": "RPM1600",
               "label": {
                 "en": "1600 rpm",
                 "nl": "1600 tpm",
                 "de": "1600 U/min"
+              }
+            },
+            {
+              "id": "Auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto",
+                "de": "Auto"
+              }
+            },
+            {
+              "id": "Max",
+              "label": {
+                "en": "Maximum",
+                "nl": "Maximaal",
+                "de": "Maximal"
               }
             }
           ]

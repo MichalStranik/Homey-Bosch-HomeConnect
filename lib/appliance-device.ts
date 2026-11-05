@@ -905,7 +905,7 @@ export class ApplianceDevice extends Homey.Device {
       driver.doorChangedTrigger
         ?.trigger(this, { door_state: String(value) }, {})
         .catch(this.error);
-      if (value === "Open") {
+      if (value === "Open" || value === "Ajar") {
         driver.doorOpenedTrigger?.trigger(this, {}, {}).catch(this.error);
       } else if (value === "Closed" || value === "Locked") {
         driver.doorClosedTrigger?.trigger(this, {}, {}).catch(this.error);

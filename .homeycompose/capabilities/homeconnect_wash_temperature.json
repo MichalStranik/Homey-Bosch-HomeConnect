@@ -80,6 +80,54 @@
         "nl": "90 °C",
         "de": "90 °C"
       }
+    },
+    {
+      "id": "UlCold",
+      "title": {
+        "en": "Cold (US)",
+        "nl": "Koud (VS)",
+        "de": "Kalt (US)"
+      }
+    },
+    {
+      "id": "UlWarm",
+      "title": {
+        "en": "Warm (US)",
+        "nl": "Warm (VS)",
+        "de": "Warm (US)"
+      }
+    },
+    {
+      "id": "UlHot",
+      "title": {
+        "en": "Hot (US)",
+        "nl": "Heet (VS)",
+        "de": "Heiß (US)"
+      }
+    },
+    {
+      "id": "UlExtraHot",
+      "title": {
+        "en": "Extra hot (US)",
+        "nl": "Extra heet (VS)",
+        "de": "Extra heiß (US)"
+      }
+    },
+    {
+      "id": "Auto",
+      "title": {
+        "en": "Auto",
+        "nl": "Auto",
+        "de": "Auto"
+      }
+    },
+    {
+      "id": "Max",
+      "title": {
+        "en": "Maximum",
+        "nl": "Maximaal",
+        "de": "Maximal"
+      }
     }
   ]
 }
