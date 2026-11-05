@@ -17,5 +17,8 @@
   },
   "1.2.2": {
     "en": "Corrected author information while preserving credit for the original developers."
+  },
+  "1.2.3": {
+    "en": "Documentation and author metadata updates."
   }
 }
