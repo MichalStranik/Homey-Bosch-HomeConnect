@@ -92,8 +92,9 @@ edit `.homeycompose/` and `drivers/*/driver*.compose.json` instead.
 
 ### Generators (`tools/`)
 
-One-shot scripts run from the repo root. They **overwrite** their outputs, so
-review the diff after running them.
+One-shot scripts run from the repo root. They **overwrite** their outputs and
+are currently **out of sync** with the committed JSON (later changes were made
+by hand) — don't re-run them without porting those changes first.
 
 | Script | Output |
 | :--- | :--- |

@@ -144,7 +144,10 @@ snake_case form, e.g. `idosLow` → `washer_idos_low`.
 
 - **`CAPABILITY_MAP`** — feature name → `{ capability, decode, encode? }`,
   shared by all types. Rows apply only if the driver declares the capability.
-  Rows with `encode` are writable and get a capability listener.
+  Rows with `encode` are writable and get a capability listener. Several
+  feature names may map to one capability (model-specific names such as
+  `LaundryCare.Washer` vs `LaundryCare.Common` VarioPerfect); writes use the
+  one the appliance has.
 - **`NUMERIC_MIRRORS`** — enum capability → numeric companion
   (`spin_speed` → `spin_speed_rpm`, `wash_temperature` → `wash_temperature_celsius`).
 - **Capability sync** — on init, declared capabilities whose feature is
@@ -156,7 +159,8 @@ snake_case form, e.g. `idosLow` → `washer_idos_low`.
   `ActionRequired`); `reconcileDerivedState()` clears progress, times and
   phase when it stops (the program name is kept on `Finished`).
 - **Events** — fire on `Off → Present` edge, then auto `AcknowledgeEvent`.
-  Unmapped events fire `<prefix>_error_occurred` with `error_code`.
+  Unmapped events fire `<prefix>_error_occurred` with `error_code`, except
+  IDDF `level` `info`/`hint` (e.g. `ProgramFinished`).
 - **Program control** — `listPrograms()` (Flow autocomplete from features
   containing `.Program.`), `startProgram()` (optional temperature, duration,
   delay via `StartInRelative`; refused if remote start is off),
@@ -169,9 +173,9 @@ snake_case form, e.g. `idosLow` → `washer_idos_low`.
 
 ### Add a capability to an existing appliance
 
-1. Define it in `tools/generate-capabilities.mjs` (JSON + SVG) and run the
-   generator, or add `.homeycompose/capabilities/<id>.json` + icon by hand.
-2. Add it to the driver's list in `tools/generate-drivers.mjs` (or to `driver.compose.json`).
+1. Add `.homeycompose/capabilities/<id>.json` (+ icon) by hand — the
+   generators in `tools/` are out of sync (see Known caveats).
+2. Add it to the driver's `driver.compose.json` capability list.
 3. Add a `CAPABILITY_MAP` row: BSH feature name → capability + decoder (+ encoder if writable).
 4. Add translations to `locales/*.json` if any new strings are used.
 5. `npm run build && npm run homey-validate`.
@@ -193,3 +197,4 @@ snake_case form, e.g. `idosLow` → `washer_idos_low`.
 - `decodePercent` has a stale comment about dividing by 100 — values are passed through as-is.
 - A `DEBUG ProgramProgress` log line in `applyValues()` is still active.
 - `tests/` contains only a manual script; there are no automated tests.
+- `tools/generate-*.mjs` are **out of sync** with the committed capability and driver JSON (later changes were made directly in the JSON). Re-running them reverts those changes — edit the JSON files by hand.
