@@ -1,0 +1,23 @@
+plugins {
+    id 'base'
+}
+
+def nodeExecutable = providers.gradleProperty('nodeExecutable').orElse('node')
+def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+
+tasks.register('npmInstall', Exec) {
+    group = 'homey'
+    description = 'Install npm dependencies (only when the Homey CLI is missing from node_modules).'
+    workingDir rootDir
+    onlyIf { !file('node_modules/homey/bin/homey.js').exists() }
+    commandLine isWindows ? ['cmd', '/c', 'npm', 'install'] : ['npm', 'install']
+}
+
+tasks.register('installHomey', Exec) {
+    group = 'homey'
+    description = 'Install the app on the selected local Homey (homey app install).'
+    dependsOn 'npmInstall'
+    workingDir rootDir
+    standardInput = System.in
+    commandLine nodeExecutable.get(), 'node_modules/homey/bin/homey.js', 'app', 'install'
+}

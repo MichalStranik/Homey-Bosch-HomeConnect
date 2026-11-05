@@ -27,3 +27,8 @@
 # Logs / OS noise
 *.log
 .DS_Store
+
+# Gradle (Android Studio run configurations)
+/.gradle/
+/build/
+/local.properties

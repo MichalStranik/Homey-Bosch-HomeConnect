@@ -5,3 +5,15 @@
 package-lock.json
 package.json
 /tests
+local.properties
+.run/
+.gradle/
+build/
+gradle/
+gradlew
+gradlew.bat
+build.gradle
+settings.gradle
+.ai/
+AGENTS.md
+env.example.json
