@@ -66,6 +66,17 @@ class WasherDevice extends ApplianceDevice {
     }
   }
 
+  /**
+   * Right after connecting the washer reports values before it marks the
+   * spin speed writable, so the first attempt is refused locally. Re-check
+   * once the spin speed's access changes.
+   */
+  protected onDescriptionChanged(featureNames: string[]): void {
+    if (!featureNames.includes(SPIN_SPEED_FEATURE)) return;
+    this.lastSpinLimitWrite = null;
+    this.enforceSpinLimit(this.getCapabilityValue("homeconnect_spin_speed"));
+  }
+
   async onSettings({
     newSettings,
     changedKeys,

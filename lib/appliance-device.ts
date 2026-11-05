@@ -768,6 +768,7 @@ export class ApplianceDevice extends Homey.Device {
       // appliance changes mode. The client has already patched the live
       // descriptors used by writes; only capability values should change here.
       this.scheduleValueRefresh();
+      this.onDescriptionChanged(changed);
     });
 
     client.on("close", (code: number, reason: string) => {
@@ -877,6 +878,13 @@ export class ApplianceDevice extends Homey.Device {
    * so per-type rules can react even when the tile value didn't change.
    */
   protected onFeatureValue(featureName: string, value: unknown): void {}
+
+  /**
+   * Subclass hook: the appliance changed the access/availability of these
+   * features (live descriptors are already patched), e.g. an option became
+   * writable after connecting or after a program was selected.
+   */
+  protected onDescriptionChanged(featureNames: string[]): void {}
 
   /**
    * An appliance event arrived (e.g. salt low). hcpy treats values like
