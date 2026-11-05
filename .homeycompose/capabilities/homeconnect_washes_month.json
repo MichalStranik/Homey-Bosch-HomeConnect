@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Washes this month",
+    "nl": "Wasbeurten deze maand",
+    "de": "Waschgänge diesen Monat"
+  },
+  "decimals": 0,
+  "min": 0,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability/homeconnect_washes_month.svg"
+}

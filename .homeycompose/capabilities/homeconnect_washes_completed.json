@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Completed washes",
+    "nl": "Voltooide wasbeurten",
+    "de": "Abgeschlossene Waschgänge"
+  },
+  "decimals": 0,
+  "min": 0,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability/homeconnect_washes_completed.svg"
+}

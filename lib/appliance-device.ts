@@ -609,6 +609,7 @@ export class ApplianceDevice extends Homey.Device {
   private connectionGeneration = 0;
   private stopped = false;
   private readonly eventStates = new Map<string, unknown>();
+  private valuesQueue: Promise<void> = Promise.resolve();
 
   async onInit(): Promise<void> {
     this.stopped = false;
@@ -750,13 +751,17 @@ export class ApplianceDevice extends Homey.Device {
 
     client.on("connected", () => {
       if (!isCurrent()) return;
+      this.onConnectionOpened();
       this.setAvailable().catch(this.error);
       this.log("connected to appliance");
     });
 
     client.on("values", (values: Record<string, unknown>) => {
       if (!isCurrent()) return;
-      this.applyValues(values).catch(this.error);
+      // Preserve protocol batch ordering across asynchronous store/capability writes.
+      this.valuesQueue = this.valuesQueue.then(async () => {
+        if (isCurrent()) await this.applyValues(values);
+      }).catch(this.error);
     });
 
     client.on("description", (changed: string[]) => {
@@ -795,6 +800,7 @@ export class ApplianceDevice extends Homey.Device {
 
   /** Push a batch of decoded feature values onto Homey capabilities. */
   private async applyValues(values: Record<string, unknown>): Promise<void> {
+    await this.onValuesReceived(values).catch(this.error);
     for (const [name, raw] of Object.entries(values)) {
       if (name === "BSH.Common.Option.ProgramProgress") {
         this.log("DEBUG ProgramProgress", this.getName(), JSON.stringify(raw));
@@ -878,6 +884,11 @@ export class ApplianceDevice extends Homey.Device {
    * so per-type rules can react even when the tile value didn't change.
    */
   protected onFeatureValue(featureName: string, value: unknown): void {}
+
+  protected onConnectionOpened(): void {}
+
+  /** Complete ordered protocol batch, before capability filtering/derived-state cleanup. */
+  protected async onValuesReceived(values: Record<string, unknown>): Promise<void> {}
 
   /**
    * Subclass hook: the appliance changed the access/availability of these
@@ -1332,6 +1343,7 @@ export class ApplianceDevice extends Homey.Device {
     this.clearValueRefresh();
     this.client?.close();
     this.client = null;
+    await this.valuesQueue;
   }
 
   async onDeleted(): Promise<void> {
@@ -1341,5 +1353,6 @@ export class ApplianceDevice extends Homey.Device {
     this.clearValueRefresh();
     this.client?.close();
     this.client = null;
+    await this.valuesQueue;
   }
 }

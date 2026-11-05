@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Last completed wash",
+    "nl": "Laatste voltooide wasbeurt",
+    "de": "Letzter abgeschlossener Waschgang"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability/homeconnect_last_wash.svg"
+}

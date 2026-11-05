@@ -73,17 +73,107 @@ const DISHWASHER_CAPS = [
 ];
 
 const WASHER_CAPS = [
-  ...SHARED_CAPS,
+  "onoff",
+  "homeconnect_operation_state",
+  "homeconnect_door_state",
+  "homeconnect_program",
+  "homeconnect_selected_program",
+  "homeconnect_laundry_process_phase",
+  "homeconnect_program_progress",
+  "homeconnect_remaining_time",
+  "homeconnect_elapsed_time",
+  "homeconnect_start_in_relative",
+  "homeconnect_remote_start",
+  "homeconnect_remote_control_active",
+  "homeconnect_local_control_active",
+  "homeconnect_program_count_started",
+  "homeconnect_child_lock",
   "homeconnect_wash_temperature",
+  "homeconnect_wash_temperature_celsius",
   "homeconnect_spin_speed",
+  "homeconnect_spin_speed_rpm",
   "homeconnect_vario_perfect",
   "homeconnect_speed_perfect",
   "homeconnect_eco_perfect",
   "homeconnect_water_plus",
   "homeconnect_prewash",
+  "homeconnect_rinse_plus",
+  "homeconnect_less_ironing",
+  "homeconnect_soak",
+  "homeconnect_multiple_soak",
+  "homeconnect_rinse_hold",
   "homeconnect_idos1_active",
   "homeconnect_idos2_active",
+  "homeconnect_energy_forecast",
+  "homeconnect_water_forecast",
+  "homeconnect_washes_completed",
+  "homeconnect_washes_month",
+  "homeconnect_last_wash"
 ];
+
+const WASHER_STATISTICS_TRIGGER = {
+  "id": "washer_statistics_updated",
+  "title": {
+    "en": "Wash statistics updated",
+    "nl": "Wasstatistieken bijgewerkt",
+    "de": "Waschstatistik aktualisiert"
+  },
+  "hint": {
+    "en": "After a tracked cycle ends. Counts include only verified completed washes; outcome is completed, aborted or unknown.",
+    "nl": "Na afloop van een bijgehouden cyclus. Alleen bevestigde voltooide wasbeurten tellen mee; resultaat: completed, aborted of unknown.",
+    "de": "Nach Ende eines erfassten Zyklus. Zähler enthalten nur bestätigte abgeschlossene Waschgänge; Ergebnis: completed, aborted oder unknown."
+  },
+  "tokens": [
+    {
+      "name": "completed",
+      "type": "number",
+      "title": {
+        "en": "Completed washes",
+        "nl": "Voltooide wasbeurten",
+        "de": "Abgeschlossene Waschgänge"
+      },
+      "example": 30
+    },
+    {
+      "name": "month",
+      "type": "number",
+      "title": {
+        "en": "Washes this month",
+        "nl": "Wasbeurten deze maand",
+        "de": "Waschgänge diesen Monat"
+      },
+      "example": 8
+    },
+    {
+      "name": "program",
+      "type": "string",
+      "title": {
+        "en": "Program",
+        "nl": "Programma",
+        "de": "Programm"
+      },
+      "example": {
+        "en": "Cotton",
+        "nl": "Cotton",
+        "de": "Cotton"
+      }
+    },
+    {
+      "name": "outcome",
+      "type": "string",
+      "title": {
+        "en": "Result",
+        "nl": "Resultaat",
+        "de": "Ergebnis"
+      },
+      "example": {
+        "en": "completed",
+        "nl": "completed",
+        "de": "completed"
+      }
+    }
+  ]
+};
 
 const DRYER_CAPS = [
   ...SHARED_CAPS,
@@ -1055,7 +1145,7 @@ if (want("washer")) {
   writeJson("drivers/washer/driver.compose.json", washerCompose);
 
   writeFlow("drivers/washer/driver.flow.compose.json", {
-    triggers: [...sharedTriggers("washer"), ...WASHER_EVENT_TRIGGERS],
+    triggers: [...sharedTriggers("washer"), ...WASHER_EVENT_TRIGGERS, WASHER_STATISTICS_TRIGGER],
     conditions: [...sharedConditions("washer"), ...WASHER_CONDITIONS],
     actions: [...sharedActions("washer", "washing machine"), ...WASHER_ACTIONS],
   });

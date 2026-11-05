@@ -38,7 +38,10 @@
     "homeconnect_idos1_active",
     "homeconnect_idos2_active",
     "homeconnect_energy_forecast",
-    "homeconnect_water_forecast"
+    "homeconnect_water_forecast",
+    "homeconnect_washes_completed",
+    "homeconnect_washes_month",
+    "homeconnect_last_wash"
   ],
   "discovery": "homeconnect-mdns",
   "images": {

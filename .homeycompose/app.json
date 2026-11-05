@@ -26,6 +26,11 @@
   },
   "permissions": [],
   "api": {
+    "getStatistics": {
+      "method": "get",
+      "path": "/statistics",
+      "public": false
+    },
     "getStatus": {
       "method": "get",
       "path": "/status",

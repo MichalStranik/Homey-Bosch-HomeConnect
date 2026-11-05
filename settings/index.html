@@ -33,7 +33,19 @@
     th { color: #777; font-weight: 600; }
     .muted { color: #888; font-size: 0.82rem; }
     a { color: #EA0016; word-break: break-all; }
+    .stats-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:0.75rem; margin:1rem 0; }
+    .stats-card { padding:0.8rem; background:#f7f7f8; border:1px solid #eee; border-radius:6px; overflow-wrap:anywhere; }
+    .stats-card strong { display:block; margin-top:0.4rem; font-size:1.1rem; }
+    .stats-bar-row { display:grid; grid-template-columns:100px 1fr 35px; gap:0.6rem; align-items:center; margin:0.4rem 0; font-size:0.82rem; }
+    .stats-bar-track { height:12px; background:#f1f1f2; border-radius:3px; overflow:hidden; }
+    .stats-bar { height:100%; background:#EA0016; }
+    .stats-ranking-row { display:flex; justify-content:space-between; gap:1rem; padding:0.5rem 0; border-bottom:1px solid #eee; }
+    .stats-table-scroll { overflow-x:auto; }
+    #stats-content td { white-space:nowrap; }
+    select { max-width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; background:white; color:#18181b; }
+    [hidden] { display:none !important; }
   </style>
+  <script type="text/javascript" src="statistics.js"></script>
 </head>
 <body>
   <h1 data-i18n="settings.title">Home Connect - pair appliances</h1>
@@ -42,6 +54,7 @@
   <div class="tabs">
     <button class="tab active" data-tab="manual" data-i18n="settings.tab_login">Login</button>
     <button class="tab" data-tab="import" data-i18n="settings.tab_import">Import devices.json</button>
+    <button class="tab" data-tab="statistics" data-i18n="statistics.title">Statistics</button>
   </div>
 
   <div class="pane active" id="pane-manual">
@@ -75,6 +88,46 @@
     <textarea id="import-text" placeholder='[ { "name": "oven", "host": "...", "key": "...", "description": {...}, "features": {...} } ]'></textarea>
     <div class="row" style="margin-top:0.5rem">
       <button id="import-submit" data-i18n="settings.import_devices">Import appliances</button>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-statistics">
+    <p class="lead" data-i18n="statistics.description"></p>
+    <div class="row">
+      <button id="stats-refresh" class="secondary" data-i18n="statistics.refresh"></button>
+      <span id="stats-message" role="status" aria-live="polite"></span>
+    </div>
+    <div id="stats-controls" class="row" hidden>
+      <label for="stats-device" data-i18n="statistics.device"></label><select id="stats-device"></select>
+      <label for="stats-period" data-i18n="statistics.period"></label><select id="stats-period"></select>
+    </div>
+    <div id="stats-content" hidden>
+      <p class="muted" id="stats-since"></p>
+      <p id="stats-active" role="status"></p>
+      <div id="stats-cards" class="stats-cards"></div>
+      <p class="hint" data-i18n="statistics.metrics_hint"></p>
+      <h2 data-i18n="statistics.chart"></h2>
+      <div id="stats-chart"></div>
+      <h2 data-i18n="statistics.programs"></h2>
+      <div id="stats-programs"></div>
+      <h2 data-i18n="statistics.history"></h2>
+      <p class="hint" data-i18n="statistics.history_hint"></p>
+      <div class="stats-table-scroll">
+        <table>
+          <thead><tr>
+            <th data-i18n="statistics.date"></th><th data-i18n="statistics.program"></th>
+            <th data-i18n="statistics.temperature"></th><th data-i18n="statistics.spin"></th>
+            <th data-i18n="statistics.duration"></th><th data-i18n="statistics.result"></th>
+          </tr></thead>
+          <tbody id="stats-history"></tbody>
+        </table>
+      </div>
+      <p id="stats-empty-history" class="muted" data-i18n="statistics.empty"></p>
+      <div class="row" style="margin-top:0.75rem">
+        <button id="stats-prev" class="secondary" data-i18n="statistics.previous"></button>
+        <span id="stats-page" aria-live="polite"></span>
+        <button id="stats-next" class="secondary" data-i18n="statistics.next"></button>
+      </div>
     </div>
   </div>
 
@@ -258,6 +311,7 @@
       }
     });
 
+    initializeWashStatistics(Homey);
     Homey.ready();
     refreshStatus();
     }

@@ -53,6 +53,19 @@ interface BodyArgs<T> extends ApiArgs {
 const manualSessions = new Map<string, PkcePair>();
 
 module.exports = {
+  /** Paired washer statistics only: never expose appliance config/local keys. */
+  async getStatistics({ homey }: ApiArgs) {
+    const devices = homey.drivers.getDriver("washer").getDevices();
+    return {
+      timeZone: homey.clock.getTimezone(),
+      devices: devices.map((device: any) => ({
+        id: String(device.getData().id),
+        name: device.getName(),
+        statistics: device.getWashStatistics(),
+      })),
+    };
+  },
+
   /** Current stored state, for the settings page to render on load. */
   async getStatus({ homey }: ApiArgs) {
     const devices: DeviceConfig[] = homey.app.getDevices();

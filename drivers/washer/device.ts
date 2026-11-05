@@ -1,16 +1,20 @@
 "use strict";
 
 import { ApplianceDevice } from "../../lib/appliance-device";
+import {
+  WashStatistics, STATISTICS_CAPABILITIES, monthKey, newStatistics, observeStatistics,
+} from "../../lib/wash-statistics";
 
 const SPIN_SPEED_FEATURE = "LaundryCare.Washer.Option.SpinSpeed";
 const SELECTED_PROGRAM_FEATURE = "BSH.Common.Root.SelectedProgram";
 const REMOTE_CONTROL_FEATURE = "BSH.Common.Status.RemoteControlActive";
 
 /**
- * Before the program starts the spin speed can still be changed; once it runs
- * the appliance locks the option, so the limit is only enforced in these.
+ * States in which the spin speed can be changed remotely. The WAX32KH1BY also
+ * accepts it while a program runs (verified live: Rinse 1200 -> 800), it just
+ * doesn't report the new value back - see setMappedCapabilityValue.
  */
-const ADJUSTABLE_STATES = new Set(["Inactive", "Ready", "DelayedStart"]);
+const ADJUSTABLE_STATES = new Set(["Inactive", "Ready", "DelayedStart", "Run", "Pause"]);
 
 interface SpinLimitSettings {
   spin_limit_enabled?: boolean;
@@ -27,6 +31,97 @@ function spinRpm(value: unknown): number | null {
 }
 
 class WasherDevice extends ApplianceDevice {
+  private statistics!: WashStatistics;
+  private continuousObservation = false;
+  private statisticsTimer: NodeJS.Timeout | null = null;
+  private statisticsPublishQueue: Promise<void> = Promise.resolve();
+
+  async onInit(): Promise<void> {
+    const saved = this.getStoreValue("washStatistics") as WashStatistics | undefined;
+    this.statistics = saved?.version === 1 ? saved : newStatistics();
+    if (!saved) await this.setStoreValue("washStatistics", this.statistics);
+    for (const capability of STATISTICS_CAPABILITIES) {
+      if (!this.hasCapability(capability)) await this.addCapability(capability);
+    }
+    await this.publishStatistics();
+    await super.onInit();
+    // Keep this-month counter correct even if the washer is off at midnight.
+    this.statisticsTimer = this.homey.setInterval(() => {
+      this.publishStatistics().catch(this.error);
+    }, 60_000);
+  }
+
+  protected onConnectionOpened(): void {
+    this.continuousObservation = false;
+  }
+
+  protected async onValuesReceived(values: Record<string, unknown>): Promise<void> {
+    const previous = this.statistics;
+    const next = observeStatistics(previous, values, new Date(), this.homey.clock.getTimezone(),
+      this.continuousObservation);
+    if (Object.hasOwn(values, "BSH.Common.Status.OperationState")) this.continuousObservation = true;
+    if (JSON.stringify(next) === JSON.stringify(previous)) return;
+    // Commit atomically before publishing counters or firing Flow events.
+    await this.setStoreValue("washStatistics", next);
+    this.statistics = next;
+    await this.publishStatistics();
+    if (next.history[0]?.endedAt !== previous.history[0]?.endedAt ||
+        next.totals.completed !== previous.totals.completed ||
+        next.totals.aborted !== previous.totals.aborted ||
+        next.totals.unknown !== previous.totals.unknown) {
+      await this.homey.flow.getDeviceTriggerCard("washer_statistics_updated").trigger(this, {
+        completed: next.totals.completed,
+        month: next.months[monthKey(new Date(), this.homey.clock.getTimezone())]?.completed ?? 0,
+        program: next.history[0]?.program ?? "",
+        outcome: next.history[0]?.outcome ?? "",
+      }, {}).catch(this.error);
+    }
+  }
+
+  getWashStatistics(): WashStatistics {
+    return structuredClone(this.statistics);
+  }
+
+  private publishStatistics(): Promise<void> {
+    // The month-rollover timer and protocol stream may both publish at once.
+    const pending = this.statisticsPublishQueue.then(() => this.updateStatisticsCapabilities());
+    this.statisticsPublishQueue = pending.catch(this.error);
+    return pending;
+  }
+
+  private async updateStatisticsCapabilities(): Promise<void> {
+    const last = this.statistics.lastCompleted;
+    const summary = last ? [
+      last.program?.replace(/([a-z])([A-Z])/g, "$1 $2") ?? "—",
+      last.temperature === "Cold" ? this.homey.__("statistics.cold")
+        : last.temperature?.match(/\d+/)?.[0] ? last.temperature.match(/\d+/)![0] + " °C" : null,
+    ].filter(Boolean).join(" · ") : this.homey.__("statistics.no_washes");
+    const values: Record<string, number | string> = {
+      homeconnect_washes_completed: this.statistics.totals.completed,
+      homeconnect_washes_month: this.statistics.months[monthKey(new Date(), this.homey.clock.getTimezone())]?.completed ?? 0,
+      homeconnect_last_wash: summary,
+    };
+    for (const [capability, value] of Object.entries(values)) {
+      if (this.getCapabilityValue(capability) !== value) {
+        await this.setCapabilityValue(capability, value as never);
+      }
+    }
+  }
+
+  async onUninit(): Promise<void> {
+    if (this.statisticsTimer) this.homey.clearInterval(this.statisticsTimer);
+    this.statisticsTimer = null;
+    await super.onUninit();
+    await this.statisticsPublishQueue;
+  }
+
+  async onDeleted(): Promise<void> {
+    if (this.statisticsTimer) this.homey.clearInterval(this.statisticsTimer);
+    this.statisticsTimer = null;
+    await super.onDeleted();
+    await this.statisticsPublishQueue;
+  }
+
   /**
    * Program + value + limit of a write the appliance hasn't confirmed yet, so
    * a silently refused write isn't repeated. Cleared as soon as the spin
@@ -95,8 +190,8 @@ class WasherDevice extends ApplianceDevice {
 
   /**
    * Spin speed limit from the advanced settings: when the selected spin speed
-   * is above the limit (Auto/Max count as above), write the limit back while
-   * the program can still be adjusted.
+   * is above the limit (Auto/Max count as above), write the limit back -
+   * before the start or during the program.
    */
   private enforceSpinLimit(
     value: unknown,

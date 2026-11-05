@@ -22,6 +22,57 @@ ${body}
 }
 
 const caps = [
+  ...[
+  {
+    "id": "homeconnect_washes_completed",
+    "json": {
+      "type": "number",
+      "title": {
+        "en": "Completed washes",
+        "nl": "Voltooide wasbeurten",
+        "de": "Abgeschlossene Waschgänge"
+      },
+      "decimals": 0,
+      "min": 0,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"2\" width=\"18\" height=\"20\" rx=\"2\"/><circle cx=\"12\" cy=\"14\" r=\"5\"/><path d=\"M7 6h4m5 0h1\"/></svg>\n"
+  },
+  {
+    "id": "homeconnect_washes_month",
+    "json": {
+      "type": "number",
+      "title": {
+        "en": "Washes this month",
+        "nl": "Wasbeurten deze maand",
+        "de": "Waschgänge diesen Monat"
+      },
+      "decimals": 0,
+      "min": 0,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"2\" width=\"18\" height=\"20\" rx=\"2\"/><circle cx=\"12\" cy=\"14\" r=\"5\"/><path d=\"M7 6h4m5 0h1\"/></svg>\n"
+  },
+  {
+    "id": "homeconnect_last_wash",
+    "json": {
+      "type": "string",
+      "title": {
+        "en": "Last completed wash",
+        "nl": "Laatste voltooide wasbeurt",
+        "de": "Letzter abgeschlossener Waschgang"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"2\" width=\"18\" height=\"20\" rx=\"2\"/><circle cx=\"12\" cy=\"14\" r=\"5\"/><path d=\"M7 6h4m5 0h1\"/></svg>\n"
+  }
+],
   // ===== Shared read-only =====
   {
     id: "homeconnect_selected_program",

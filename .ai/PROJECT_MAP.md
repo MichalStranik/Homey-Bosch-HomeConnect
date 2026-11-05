@@ -9,8 +9,9 @@ Home Connect appliances. Not an Android project. Full description:
 | File | Role |
 | :--- | :--- |
 | `app.ts` | `HomeConnectApp` — owns `homey.settings` (`devices`, `refreshToken`) |
-| `api.ts` | Settings-page Web API (`/status`, `/manual/start`, `/manual/submit`, `/import`, `/refresh`, `/clear`) |
-| `settings/index.html` | Key-exchange wizard UI |
+| `api.ts` | Settings-page Web API (`/status`, `/manual/start`, `/manual/submit`, `/import`, `/refresh`, `/clear`, `/statistics`) |
+| `settings/index.html` | Key-exchange wizard and Statistics tab |
+| `settings/statistics.js` | Paired washer dashboard, periods, monthly chart, history |
 | `drivers/<type>/driver.ts` | Per-type driver (`oven`, `dishwasher`, `washer`, `dryer`) |
 
 ## Layers (`lib/`)
@@ -21,6 +22,7 @@ Home Connect appliances. Not an Android project. Full description:
 | Transport | `home-connect-socket.ts` (TLS-PSK / TCP), `aes-hmac-codec.ts` |
 | Protocol | `home-connect-client.ts` |
 | Homey base classes | `appliance-driver.ts`, `appliance-device.ts` (`CAPABILITY_MAP`) |
+| Washer usage | `wash-statistics.ts` — pure cycle reducer; washer device persists `washStatistics`, migrates derived capabilities, publishes Flow tokens |
 | Types | `types.ts` (`DeviceConfig`, `FeatureDescriptor`, `HomeConnectMessage`) |
 
 ## Manifests & generated files
@@ -39,4 +41,5 @@ Not connectable: Bosch WTX87M90BY dryer (no Wi-Fi / Home Connect).
 
 ## Other
 
+- `tests/*.test.cjs` — cycle reducer, mocked washer integration, localization and headless browser settings tests
 - `locales/` (en, nl, de), `assets/`, `tools/` (generators), `tests/homeconnect-test.js` (manual protocol test), `docs/`

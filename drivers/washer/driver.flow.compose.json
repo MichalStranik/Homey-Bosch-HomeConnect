@@ -344,6 +344,69 @@
           }
         }
       ]
+    },
+    {
+      "id": "washer_statistics_updated",
+      "title": {
+        "en": "Wash statistics updated",
+        "nl": "Wasstatistieken bijgewerkt",
+        "de": "Waschstatistik aktualisiert"
+      },
+      "hint": {
+        "en": "After a tracked cycle ends. Counts include only verified completed washes; outcome is completed, aborted or unknown.",
+        "nl": "Na afloop van een bijgehouden cyclus. Alleen bevestigde voltooide wasbeurten tellen mee; resultaat: completed, aborted of unknown.",
+        "de": "Nach Ende eines erfassten Zyklus. Zähler enthalten nur bestätigte abgeschlossene Waschgänge; Ergebnis: completed, aborted oder unknown."
+      },
+      "tokens": [
+        {
+          "name": "completed",
+          "type": "number",
+          "title": {
+            "en": "Completed washes",
+            "nl": "Voltooide wasbeurten",
+            "de": "Abgeschlossene Waschgänge"
+          },
+          "example": 30
+        },
+        {
+          "name": "month",
+          "type": "number",
+          "title": {
+            "en": "Washes this month",
+            "nl": "Wasbeurten deze maand",
+            "de": "Waschgänge diesen Monat"
+          },
+          "example": 8
+        },
+        {
+          "name": "program",
+          "type": "string",
+          "title": {
+            "en": "Program",
+            "nl": "Programma",
+            "de": "Programm"
+          },
+          "example": {
+            "en": "Cotton",
+            "nl": "Cotton",
+            "de": "Cotton"
+          }
+        },
+        {
+          "name": "outcome",
+          "type": "string",
+          "title": {
+            "en": "Result",
+            "nl": "Resultaat",
+            "de": "Ergebnis"
+          },
+          "example": {
+            "en": "completed",
+            "nl": "completed",
+            "de": "completed"
+          }
+        }
+      ]
     }
   ],
   "conditions": [
