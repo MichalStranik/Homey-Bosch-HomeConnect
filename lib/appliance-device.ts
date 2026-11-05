@@ -1197,8 +1197,16 @@ export class ApplianceDevice extends Homey.Device {
 
   // --- mDNS discovery: keep the host in sync if the appliance's IP moves ---
 
+  /**
+   * The appliance advertises `_homeconnect._tcp` with a display instance name
+   * ("Washer BOSCH WAX32KH1BY"); its haId is in the TXT `id` record, which the
+   * discovery strategy uses as the result id. The stored host is that same
+   * name (not DNS-resolvable from Homey), so match either, case-insensitively.
+   */
   onDiscoveryResult(result: Homey.DiscoveryResult): boolean {
-    return result.id === this.config.haId;
+    const id = String(result.id ?? "").toLowerCase();
+    if (!id || !this.config) return false;
+    return id === this.config.haId?.toLowerCase() || id === this.config.host?.toLowerCase();
   }
 
   async onDiscoveryAvailable(result: Homey.DiscoveryResult): Promise<void> {

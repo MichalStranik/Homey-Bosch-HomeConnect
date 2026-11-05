@@ -4,5 +4,5 @@
     "name": "homeconnect",
     "protocol": "tcp"
   },
-  "id": "{{name}}"
+  "id": "{{txt.id}}"
 }
