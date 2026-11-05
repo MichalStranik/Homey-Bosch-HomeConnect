@@ -114,6 +114,18 @@ const encodeEnumIndex: Encoder = (v, feature) => {
   return null;
 };
 
+/**
+ * Off/Plus1-3 level options (RinsePlus, MultipleSoak). They are enums on
+ * current laundry IDDFs; a boolean variant maps true/false onto Plus1/Off.
+ */
+const decodePlusLevel: Decoder = (v) => {
+  if (typeof v === "boolean") return v ? "Plus1" : "Off";
+  return decodeLastSegment(v);
+};
+
+const encodePlusLevel: Encoder = (v, feature) =>
+  feature?.values ? encodeEnumIndex(v, feature) : v !== "Off";
+
 /** PowerState: boolean <-> enum index ("On" / "Off" or "Standby"). */
 const encodePowerState: Encoder = (v, feature) => {
   if (!feature?.values) return null;
@@ -452,8 +464,8 @@ const CAPABILITY_MAP: Record<string, CapabilityMapEntry> = {
   },
   "LaundryCare.Washer.Option.RinsePlus": {
     capability: "homeconnect_rinse_plus",
-    decode: decodeBool,
-    encode: encodeBool,
+    decode: decodePlusLevel,
+    encode: encodePlusLevel,
   },
   "LaundryCare.Washer.Option.LessIroning": {
     capability: "homeconnect_less_ironing",
@@ -467,8 +479,8 @@ const CAPABILITY_MAP: Record<string, CapabilityMapEntry> = {
   },
   "LaundryCare.Washer.Option.MultipleSoak": {
     capability: "homeconnect_multiple_soak",
-    decode: decodeBool,
-    encode: encodeBool,
+    decode: decodePlusLevel,
+    encode: encodePlusLevel,
   },
   "LaundryCare.Washer.Option.RinseHold": {
     capability: "homeconnect_rinse_hold",
@@ -625,6 +637,14 @@ export class ApplianceDevice extends Homey.Device {
     // but didn't match oven semantics. Pull it off existing paired devices.
     if (this.hasCapability("target_temperature")) {
       await this.removeCapability("target_temperature").catch(this.error);
+    }
+
+    // Migration: rinse_plus / multiple_soak changed from boolean to an
+    // Off/Plus1-3 enum; drop a stale boolean value until the appliance reports.
+    for (const capability of ["homeconnect_rinse_plus", "homeconnect_multiple_soak"]) {
+      if (this.hasCapability(capability) && typeof this.getCapabilityValue(capability) === "boolean") {
+        await this.setCapabilityValue(capability, null as never).catch(this.error);
+      }
     }
 
     // Drop capabilities whose backing feature is absent from this particular
