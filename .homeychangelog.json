@@ -14,5 +14,8 @@
   },
   "1.2.1": {
     "en": "Exclude development files and private local configuration from the app package."
+  },
+  "1.2.2": {
+    "en": "Corrected author information while preserving credit for the original developers."
   }
 }

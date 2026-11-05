@@ -1,6 +1,6 @@
 {
   "id": "com.msd.bosch.homeconnect",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "compatibility": ">=12.9.0",
   "sdk": 3,
   "platforms": [
@@ -21,8 +21,7 @@
     "appliances"
   ],
   "author": {
-    "name": "Lucas van der Have",
-    "email": "lucasvdhave@gmail.com"
+    "name": "Michal Stráník"
   },
   "permissions": [],
   "api": {
@@ -80,5 +79,13 @@
   "bugs": {
     "url": "https://github.com/lucasvdh/codes.lucasvdh.homeconnect/issues"
   },
-  "source": "https://github.com/lucasvdh/codes.lucasvdh.homeconnect"
+  "source": "https://github.com/lucasvdh/codes.lucasvdh.homeconnect",
+  "contributors": {
+    "developers": [
+      {
+        "name": "Lucas van der Have",
+        "email": "lucasvdhave@gmail.com"
+      }
+    ]
+  }
 }

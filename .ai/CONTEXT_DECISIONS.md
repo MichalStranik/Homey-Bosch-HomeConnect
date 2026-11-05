@@ -90,3 +90,22 @@
   - .ai/CONTEXT_DECISIONS.md
 
 - 2026-11-05: Current branches renamed to master with original commits preserved; local tracking uses origin/master. GitHub rename API used for SALUS/HomeConnect. SmartThings remains master. Permanent rule added to AGENTS and project requirements. Old combined SALUS master preserved as backup/combined-master-before-20261105. Only branch names and documentation changed; no runtime/build changes or new deployment.
+
+
+### [2026-11-05] [Author metadata and test installation]
+- **Status:** In Progress
+- **Objective:** Show Michal Str?n?k as author of the user-owned application and install the test Store build.
+- **Sources & Ingestion:**
+  - **Figma:** None
+  - **Slack / Communications:** User requests author correction, commit/push master, test-only publication and Homey installation.
+  - **Base Components Reused:** Existing Homey manifest, contributor metadata and test release workflow.
+- **Decisions & Rationale (Why & How):**
+  - Store ownership already resolves to Michal Str?n?k. Installed development copies can have author.name=null; Store installations supply account author metadata.
+  - Correct the source manifest author and preserve the original author as a developer contributor. Metadata-only patch; no runtime/device changes.
+  - Use existing Bridge test installation tool; do not bypass required confirmation. Other user apps with correct metadata need Store/test installation rather than invented runtime fixes.
+- **Touched Files:**
+  - .homeycompose/app.json
+  - package.json
+  - package-lock.json
+  - .homeychangelog.json
+- 2026-11-05 checkpoint: Author metadata patch verified in generated app/build manifest. HomeConnect 16 tests and SmartThings 15 regression scripts pass; both builds and publish validations pass. Store metadata already identifies Michal Stráník; four other installed development apps require Store installation. Commit/push master before test-only publication.
