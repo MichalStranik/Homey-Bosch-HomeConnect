@@ -23,6 +23,9 @@ const RUNNING_ONLY_FEATURES = new Set([
   "BSH.Common.Option.StartInRelative",
 ]);
 
+/** IDDF event levels that are notifications rather than faults. */
+const NON_ERROR_EVENT_LEVELS = new Set(["info", "hint"]);
+
 /** Decode a value coming from the appliance into a Homey capability value. */
 type Decoder = (v: unknown, feature?: FeatureDescriptor) => unknown;
 /** Encode a Homey capability value into the wire form the appliance expects. */
@@ -846,13 +849,26 @@ export class ApplianceDevice extends Homey.Device {
       } else {
         this.error(`event ${featureName} mapped to unknown trigger ${spec.triggerKey}`);
       }
-    } else if (driver.errorOccurredTrigger) {
+    } else if (driver.errorOccurredTrigger && this.isErrorEvent(featureName)) {
       // Unmapped event: surface as a generic error_occurred trigger with the
       // bare event name as a token, so users can still react to unknowns.
       const code = featureName.split(".").pop() ?? featureName;
       driver.errorOccurredTrigger.trigger(this, { error_code: code }, {}).catch(this.error);
     }
     this.acknowledgeEvent();
+  }
+
+  /**
+   * Whether an unmapped event is worth an error_occurred trigger. The IDDF
+   * tags each event with a `level` (info / hint / warning / alert /
+   * critical); info and hint events such as ProgramFinished, ProgramAborted
+   * or DrumCleanReminder are routine notifications, not faults. Events
+   * without a level keep the previous behaviour and are reported.
+   */
+  private isErrorEvent(featureName: string): boolean {
+    const level = this.findFeature(featureName)?.level;
+    if (typeof level !== "string") return true;
+    return !NON_ERROR_EVENT_LEVELS.has(level.toLowerCase());
   }
 
   private acknowledgeEvent(): void {
