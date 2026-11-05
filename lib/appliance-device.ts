@@ -424,6 +424,12 @@ const CAPABILITY_MAP: Record<string, CapabilityMapEntry> = {
     decode: decodeLastSegment,
     encode: encodeEnumIndex,
   },
+  // Newer laundry IDDFs (e.g. WAX32KH1BY) publish VarioPerfect under Common.
+  "LaundryCare.Common.Option.VarioPerfect": {
+    capability: "homeconnect_vario_perfect",
+    decode: decodeLastSegment,
+    encode: encodeEnumIndex,
+  },
   "LaundryCare.Washer.Option.SpeedPerfect": {
     capability: "homeconnect_speed_perfect",
     decode: decodeBool,
@@ -660,19 +666,27 @@ export class ApplianceDevice extends Homey.Device {
    * not use `access` or `available` here: Home Connect may change those while
    * the appliance changes mode or remote-control state, and Homey capabilities
    * should describe model support, not current writeability.
+   *
+   * Several features may back one capability (model-specific names, e.g.
+   * LaundryCare.Washer vs LaundryCare.Common VarioPerfect); the capability is
+   * kept when any of them is present.
    */
   private async syncCapabilities(): Promise<void> {
     const declared = new Set<string>(this.driver.manifest.capabilities ?? []);
+    const usable = new Map<string, boolean>();
 
     for (const [featureName, entry] of Object.entries(CAPABILITY_MAP)) {
       if (!declared.has(entry.capability)) continue;
-      const feature = this.findFeature(featureName, this.capabilitySyncFeatures);
-      const usable = feature != null;
-      const has = this.hasCapability(entry.capability);
-      if (usable && !has) {
-        await this.addCapability(entry.capability).catch(this.error);
-      } else if (!usable && has) {
-        await this.removeCapability(entry.capability).catch(this.error);
+      const present = this.findFeature(featureName, this.capabilitySyncFeatures) != null;
+      usable.set(entry.capability, (usable.get(entry.capability) ?? false) || present);
+    }
+
+    for (const [capability, isUsable] of usable) {
+      const has = this.hasCapability(capability);
+      if (isUsable && !has) {
+        await this.addCapability(capability).catch(this.error);
+      } else if (!isUsable && has) {
+        await this.removeCapability(capability).catch(this.error);
       }
     }
   }
@@ -685,9 +699,11 @@ export class ApplianceDevice extends Homey.Device {
 
   /** Set up registerCapabilityListener for every writable capability. */
   private registerWritableCapabilities(): void {
-    for (const [featureName, entry] of Object.entries(CAPABILITY_MAP)) {
+    const registered = new Set<string>();
+    for (const entry of Object.values(CAPABILITY_MAP)) {
       if (!entry.encode) continue;
-      if (!this.hasCapability(entry.capability)) continue;
+      if (!this.hasCapability(entry.capability) || registered.has(entry.capability)) continue;
+      registered.add(entry.capability);
       this.registerCapabilityListener(entry.capability, async (value: unknown) => {
         await this.setMappedCapabilityValue(entry.capability, value);
       });
@@ -1060,16 +1076,20 @@ export class ApplianceDevice extends Homey.Device {
 
   /** Write a mapped writable capability to the appliance without faking local state. */
   async setMappedCapabilityValue(capability: string, value: unknown): Promise<void> {
-    const row = Object.entries(CAPABILITY_MAP).find(([, entry]) => entry.capability === capability);
-    if (!row) {
-      throw new Error(this.homey.__("device.error.feature_not_supported"));
+    // Pick the first writable row whose feature this appliance actually has.
+    let featureName: string | null = null;
+    let entry: CapabilityMapEntry | null = null;
+    let uid: number | null = null;
+    for (const [name, candidate] of Object.entries(CAPABILITY_MAP)) {
+      if (candidate.capability !== capability || !candidate.encode) continue;
+      const candidateUid = this.findUid(name);
+      if (candidateUid == null) continue;
+      featureName = name;
+      entry = candidate;
+      uid = candidateUid;
+      break;
     }
-    const [featureName, entry] = row;
-    if (!entry.encode) {
-      throw new Error(this.homey.__("device.error.feature_not_supported"));
-    }
-    const uid = this.findUid(featureName);
-    if (uid == null) {
+    if (featureName == null || entry?.encode == null || uid == null) {
       throw new Error(this.homey.__("device.error.feature_not_supported"));
     }
     const feature = this.config.features?.[String(uid)];
