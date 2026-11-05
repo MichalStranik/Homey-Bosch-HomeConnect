@@ -84,10 +84,22 @@ program-dependent and become available when a program is selected).
 ## Spin speed limit
 
 Advanced device settings *Limit spin speed* (on/off) and *Maximum spin speed*
-(400–1600 rpm, this model's values). While the washer is Inactive / Ready /
-DelayedStart, a selected spin speed above the limit (Auto and Max count as
-above) is written back to the limit. Requires Remote Control on the washer;
-a running program is not changed. Implemented in `drivers/washer/device.ts`.
+(400–1600 rpm, this model's values). A spin speed above the limit (Auto and
+Max count as above) is written back to the limit — before the start and while
+the program runs. Implemented in `drivers/washer/device.ts`.
+
+Observed behaviour (live test 2026-11-05):
+
+- Turning the dial or pressing buttons switches *Remote Control* off for
+  ~5 s; remote writes are ignored meanwhile, so the limit applies once it
+  is back (EasyCare: 800 rpm 96 ms after Remote Control returned).
+- Right after a (re)connect the spin speed becomes writable only after the
+  description changes arrive.
+- During a running program (Rinse) the washer **accepts** a spin speed write
+  (display 1200 → 800) but **does not report it back**; the app reflects
+  written options locally.
+- `PauseProgram` sent remotely during the program was ignored (Remote Start
+  off) — not needed, the option can be changed directly.
 
 ## History
 

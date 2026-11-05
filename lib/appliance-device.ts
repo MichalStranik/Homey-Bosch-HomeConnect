@@ -1151,7 +1151,11 @@ export class ApplianceDevice extends Homey.Device {
     await this.client.setValue(uid, true);
   }
 
-  /** Write a mapped writable capability to the appliance without faking local state. */
+  /**
+   * Write a mapped writable capability to the appliance. State normally comes
+   * back from the appliance; only program options are reflected locally (see
+   * the end of this method).
+   */
   async setMappedCapabilityValue(capability: string, value: unknown): Promise<void> {
     // Pick the first writable row whose feature this appliance actually has.
     let featureName: string | null = null;
@@ -1182,6 +1186,23 @@ export class ApplianceDevice extends Homey.Device {
       `${capability} -> ${JSON.stringify(value)}; ${featureName} uid=${uid} value=${JSON.stringify(encoded)}`,
     );
     await this.client.setValue(uid, encoded);
+
+    // Program options changed while a program runs are applied but not
+    // reported back (seen on WAX32KH1BY: spin speed 1200 -> 800 during
+    // Rinse, no /ro/values notify). Reflect the written value on the tile
+    // and its numeric mirror; a later notify still overrides it.
+    if (featureName.includes(".Option.")) {
+      if (this.getCapabilityValue(capability) !== value) {
+        await this.setCapabilityValue(capability, value as never).catch(this.error);
+      }
+      const mirror = NUMERIC_MIRRORS[capability];
+      if (mirror && this.hasCapability(mirror)) {
+        const numeric = decodeEnumToNumber(value);
+        if (numeric !== this.getCapabilityValue(mirror)) {
+          await this.setCapabilityValue(mirror, numeric as never).catch(this.error);
+        }
+      }
+    }
   }
 
   /**
