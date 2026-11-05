@@ -17,4 +17,6 @@ settings.gradle
 .ai/
 AGENTS.md
 env.example.json
+/devices.json
+/Solax/
 .config/

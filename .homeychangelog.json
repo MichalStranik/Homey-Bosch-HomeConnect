@@ -11,5 +11,8 @@
     "en": "More washer options (Rinse Plus, Less Ironing, Soak, Rinse Hold), program phase, energy/water forecast, and numeric spin speed/temperature for Flows. Fixed i-DOS controls and idle progress-tile flickering.",
     "nl": "Meer wasmachine-opties (extra spoelen, minder strijken, weken, spoelstop), programmafase, verwacht energie-/waterverbruik en numeriek centrifugetoerental/temperatuur voor Flows. i-DOS-bediening en knipperende voortgangstegels in rust verholpen.",
     "de": "Mehr Waschmaschinen-Optionen (Extra Spülen, Leichter Bügeln, Einweichen, Spülstopp), Programmphase, Energie-/Wasserprognose und numerische Schleuderdrehzahl/Temperatur für Flows. i-DOS-Steuerung und Flackern der Fortschrittskacheln im Leerlauf behoben."
+  },
+  "1.2.1": {
+    "en": "Exclude development files and private local configuration from the app package."
   }
 }
