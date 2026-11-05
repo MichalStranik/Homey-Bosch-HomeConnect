@@ -1272,7 +1272,8 @@ export class ApplianceDevice extends Homey.Device {
     }
   }
 
-  private scheduleValueRefresh(): void {
+  /** Re-read the full state from the appliance (debounced, 500 ms). */
+  protected scheduleValueRefresh(): void {
     if (this.refreshValuesTimer) {
       this.homey.clearTimeout(this.refreshValuesTimer);
     }

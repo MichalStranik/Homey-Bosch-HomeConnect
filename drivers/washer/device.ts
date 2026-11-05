@@ -33,14 +33,23 @@ class WasherDevice extends ApplianceDevice {
    */
   private lastSpinLimitWrite: string | null = null;
 
+  /** Last selected program seen, to tell a real program change from a repeat. */
+  private lastSelectedProgram: unknown = undefined;
+
   protected onFeatureValue(featureName: string, value: unknown): void {
     if (featureName === SPIN_SPEED_FEATURE) {
       this.enforceSpinLimit(value);
     } else if (featureName === SELECTED_PROGRAM_FEATURE) {
-      // A new program brings its own default spin speed; the appliance may
-      // report it before or after the program, so re-check either way.
+      // The full state repeats the selected program; only react to a change.
+      if (value === this.lastSelectedProgram) return;
+      this.lastSelectedProgram = value;
+      // A new program brings its own default spin speed. The appliance may
+      // report it before or after the program, or not at all when it equals
+      // the previous one - so re-check now and re-read the state to get the
+      // spin speed that actually applies to the new program.
       this.lastSpinLimitWrite = null;
       this.enforceSpinLimit(this.getCapabilityValue("homeconnect_spin_speed"));
+      if (this.isSpinLimitEnabled()) this.scheduleValueRefresh();
     }
   }
 
@@ -54,6 +63,10 @@ class WasherDevice extends ApplianceDevice {
     if (!changedKeys.some((key) => key.startsWith("spin_limit_"))) return;
     this.lastSpinLimitWrite = null;
     this.enforceSpinLimit(this.getCapabilityValue("homeconnect_spin_speed"), newSettings);
+  }
+
+  private isSpinLimitEnabled(): boolean {
+    return (this.getSettings() as SpinLimitSettings).spin_limit_enabled === true;
   }
 
   /**
