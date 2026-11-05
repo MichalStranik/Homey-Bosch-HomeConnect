@@ -70,5 +70,124 @@
       "id": "add_devices",
       "template": "add_devices"
     }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Spin speed limit",
+        "nl": "Centrifugelimiet",
+        "de": "Schleuderdrehzahl-Begrenzung"
+      },
+      "children": [
+        {
+          "id": "spin_limit_enabled",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Limit spin speed",
+            "nl": "Centrifugetoerental beperken",
+            "de": "Schleuderdrehzahl begrenzen"
+          },
+          "hint": {
+            "en": "When a program is selected with a higher spin speed (Auto and Max count as higher), Homey lowers it to the maximum below before the program starts. Requires Remote Control on the washer; a running program is not changed.",
+            "nl": "Als een programma met een hoger toerental wordt gekozen (Auto en Max tellen als hoger), verlaagt Homey het naar het maximum hieronder voordat het programma start. Vereist Remote Control op de wasmachine; een lopend programma wordt niet gewijzigd.",
+            "de": "Wird ein Programm mit höherer Schleuderdrehzahl gewählt (Auto und Max gelten als höher), senkt Homey sie vor dem Start auf das Maximum unten. Erfordert Remote Control an der Waschmaschine; ein laufendes Programm wird nicht geändert."
+          }
+        },
+        {
+          "id": "spin_limit_rpm",
+          "type": "dropdown",
+          "value": "RPM800",
+          "label": {
+            "en": "Maximum spin speed",
+            "nl": "Maximaal centrifugetoerental",
+            "de": "Maximale Schleuderdrehzahl"
+          },
+          "values": [
+            {
+              "id": "RPM400",
+              "label": {
+                "en": "400 rpm",
+                "nl": "400 tpm",
+                "de": "400 U/min"
+              }
+            },
+            {
+              "id": "RPM600",
+              "label": {
+                "en": "600 rpm",
+                "nl": "600 tpm",
+                "de": "600 U/min"
+              }
+            },
+            {
+              "id": "RPM700",
+              "label": {
+                "en": "700 rpm",
+                "nl": "700 tpm",
+                "de": "700 U/min"
+              }
+            },
+            {
+              "id": "RPM800",
+              "label": {
+                "en": "800 rpm",
+                "nl": "800 tpm",
+                "de": "800 U/min"
+              }
+            },
+            {
+              "id": "RPM900",
+              "label": {
+                "en": "900 rpm",
+                "nl": "900 tpm",
+                "de": "900 U/min"
+              }
+            },
+            {
+              "id": "RPM1000",
+              "label": {
+                "en": "1000 rpm",
+                "nl": "1000 tpm",
+                "de": "1000 U/min"
+              }
+            },
+            {
+              "id": "RPM1200",
+              "label": {
+                "en": "1200 rpm",
+                "nl": "1200 tpm",
+                "de": "1200 U/min"
+              }
+            },
+            {
+              "id": "RPM1400",
+              "label": {
+                "en": "1400 rpm",
+                "nl": "1400 tpm",
+                "de": "1400 U/min"
+              }
+            },
+            {
+              "id": "RPM1500",
+              "label": {
+                "en": "1500 rpm",
+                "nl": "1500 tpm",
+                "de": "1500 U/min"
+              }
+            },
+            {
+              "id": "RPM1600",
+              "label": {
+                "en": "1600 rpm",
+                "nl": "1600 tpm",
+                "de": "1600 U/min"
+              }
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

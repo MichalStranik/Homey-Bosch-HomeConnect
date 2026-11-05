@@ -849,6 +849,7 @@ export class ApplianceDevice extends Homey.Device {
 
       const feature = this.findFeature(name);
       const value = mapping.decode(raw, feature);
+      this.onFeatureValue(name, value);
       if (value === this.getCapabilityValue(mapping.capability)) continue;
 
       try {
@@ -869,6 +870,13 @@ export class ApplianceDevice extends Homey.Device {
     }
     this.reconcileDerivedState();
   }
+
+  /**
+   * Subclass hook: called for every decoded value of a mapped capability,
+   * including unchanged ones (e.g. the full state sent after a reconnect),
+   * so per-type rules can react even when the tile value didn't change.
+   */
+  protected onFeatureValue(featureName: string, value: unknown): void {}
 
   /**
    * An appliance event arrived (e.g. salt low). hcpy treats values like

@@ -81,6 +81,14 @@ program-dependent and become available when a program is selected).
 | `DelayedShutdown`, `DelayedShutdownCanceled`, `DrumCleanReminder`, `SpinAbort`, `FoamDetection`, `DoorNotUnlockable`, `ReleaseRinseHoldPending`, `CustomerServiceRequest`, `HomeConnectApplianceDataMissing` (level hint/info) | ✅ | acknowledged, not reported as errors |
 | `PumpError`, `FatalErrorOccured`, `IDosUnitDefect`, `IDosOpenTray`, `DoorNotLockable`, `DoorOpen`, `WaterLevelTooHigh`, `SupplyVoltageTooLow` (warning/alert/critical) | ✅ | via generic `washer_error_occurred` with `error_code` |
 
+## Spin speed limit
+
+Advanced device settings *Limit spin speed* (on/off) and *Maximum spin speed*
+(400–1600 rpm, this model's values). While the washer is Inactive / Ready /
+DelayedStart, a selected spin speed above the limit (Auto and Max count as
+above) is written back to the limit. Requires Remote Control on the washer;
+a running program is not changed. Implemented in `drivers/washer/device.ts`.
+
 ## History
 
 - 2026-11-05 — audit; fixed: info/hint events no longer reported as errors, full door/temperature/spin enums, Common VarioPerfect, RinsePlus/MultipleSoak levels, process phase, "ready in" start.
