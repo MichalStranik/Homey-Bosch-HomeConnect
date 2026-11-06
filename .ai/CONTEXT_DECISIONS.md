@@ -125,3 +125,5 @@
   - .ai/CONTEXT_DECISIONS.md
 
 - **Verification / checkpoint:** All original local and fetched remote branch tips are ancestors of pushed master. Local branches: master only; tracking origin/master. Remote branches: master only. Obsolete branches deleted only after ancestry checks and successful master push.
+
+- **Final verification (2026-11-06):** Standard GitHub CLI device authentication completed as MichalStranik. All eight repositories verified with ls-remote --heads/--symref and local refs: master is the sole local and remote branch and GitHub default, current master is pushed, working trees clean. Previous authentication blockers above are resolved. All removed tips remain in master ancestry.
