@@ -109,3 +109,17 @@
   - package-lock.json
   - .homeychangelog.json
 - 2026-11-05 checkpoint: Author metadata patch verified in generated app/build manifest. HomeConnect 16 tests and SmartThings 15 regression scripts pass; both builds and publish validations pass. Store metadata already identifies Michal Stráník; four other installed development apps require Store installation. Commit/push master before test-only publication.
+
+
+### [2026-11-06] Consolidate all Git branches on master
+- **Status:** In Progress
+- **Objective:** Preserve all branch commits under master and remove other branches locally and remotely.
+- **Sources & Ingestion:**
+  - **Figma:** None
+  - **Slack / Communications:** User explicitly instructed: move current commits under master and remove other branches.
+  - **Base Components Reused:** Existing Git commits, no app identity migration.
+- **Decisions & Rationale (Why & How):**
+  - Preserve former washer feature branch history with ours merge. Current master 1.2.3 already has newer washer implementation, corrected enums, app identity and spin-limit logic.
+  - Push master first, verify all source tips are ancestors, then delete other branches. Normal GitHub CLI device login pending in shell-28; no credential extraction.
+- **Touched Files:**
+  - .ai/CONTEXT_DECISIONS.md
