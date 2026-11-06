@@ -7,3 +7,8 @@
 
 - [x] 2026-11-05: Publish HomeConnect 1.2.0 / SALUS 0.6.1 / SmartThings 4.0.2 only to test under com.msd.; API confirms all liveVersion=null.
 - [x] Final correction: HomeConnect 1.2.1 build 3 TEST, clean archive; supersedes 1.2.0 build 1.
+
+
+## Master consolidation - 2026-11-06
+- [x] Preserve all original branch tips in master ancestry; push master; delete other local branches.
+- [x] Verify only master exists on origin.
